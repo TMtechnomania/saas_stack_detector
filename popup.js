@@ -23,6 +23,14 @@
 	const btnCopy = document.getElementById("btn-copy");
 	const btnMissing = document.getElementById("btn-missing");
 
+	// Telemetry Refs
+	const btnTelemetry = document.getElementById("btn-telemetry");
+	const iconTelemetryOn = document.getElementById("icon-telemetry-on");
+	const iconTelemetryOff = document.getElementById("icon-telemetry-off");
+	const onboardingOverlay = document.getElementById("onboarding-overlay");
+	const btnAccept = document.getElementById("btn-accept");
+	const btnDecline = document.getElementById("btn-decline");
+
 	// ─── Theme Init ───
 	const savedTheme = localStorage.getItem("theme") || "dark";
 	if (savedTheme === "light") {
@@ -33,6 +41,10 @@
 	document.addEventListener("DOMContentLoaded", init);
 
 	async function init() {
+		// 1. Check Telemetry Consent
+		await checkTelemetryConsent();
+
+		// 2. Start Scan
 		try {
 			const [tab] = await chrome.tabs.query({
 				active: true,
@@ -115,6 +127,44 @@
 		} catch (err) {
 			console.error("[StackDetector] Init error:", err);
 			showError("Failed to initialize");
+		}
+	}
+
+	// ─── Privacy / Telemetry Logic ───
+	async function checkTelemetryConsent() {
+		const { telemetry_consent } =
+			await chrome.storage.local.get("telemetry_consent");
+
+		if (typeof telemetry_consent === "undefined") {
+			// New user: Show onboarding
+			onboardingOverlay.classList.remove("hidden");
+		} else {
+			// Existing user: Update UI
+			updateTelemetryUI(telemetry_consent);
+		}
+	}
+
+	function updateTelemetryUI(enabled) {
+		if (enabled) {
+			iconTelemetryOn.classList.remove("hidden");
+			iconTelemetryOn.style.display = ""; // Clear inline style
+			iconTelemetryOff.classList.add("hidden");
+			btnTelemetry.title = "Telemetry: ON (Sharing anonymous data)";
+		} else {
+			iconTelemetryOn.classList.add("hidden");
+			iconTelemetryOff.classList.remove("hidden");
+			iconTelemetryOff.style.display = ""; // Clear inline style
+			btnTelemetry.title = "Telemetry: OFF (Not sharing data)";
+		}
+	}
+
+	async function setConsent(enabled) {
+		await chrome.storage.local.set({ telemetry_consent: enabled });
+		updateTelemetryUI(enabled);
+		if (enabled) {
+			showToast("Telemetry Enabled");
+		} else {
+			showToast("Telemetry Disabled");
 		}
 	}
 
@@ -251,6 +301,23 @@
 
 	btnRefresh.addEventListener("click", () => {
 		location.reload(); // Reload popup to re-init
+	});
+
+	// Telemetry Events
+	btnTelemetry.addEventListener("click", async () => {
+		const { telemetry_consent } =
+			await chrome.storage.local.get("telemetry_consent");
+		setConsent(!telemetry_consent);
+	});
+
+	btnAccept.addEventListener("click", () => {
+		setConsent(true);
+		onboardingOverlay.classList.add("hidden");
+	});
+
+	btnDecline.addEventListener("click", () => {
+		setConsent(false);
+		onboardingOverlay.classList.add("hidden");
 	});
 
 	btnExport.addEventListener("click", () => {

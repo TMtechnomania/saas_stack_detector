@@ -191,9 +191,57 @@
 
 			<!-- Footer -->
 			<footer class="footer">
-				<span class="footer-count" id="tech-count"
-					>0 technologies found</span
-				>
+				<div class="footer-left">
+					<button
+						id="btn-telemetry"
+						class="icon-btn footer-btn"
+						title="Toggle Telemetry (Sharing Data)">
+						<!-- Signal On -->
+						<svg
+							id="icon-telemetry-on"
+							width="16"
+							height="16"
+							viewBox="0 0 24 24"
+							fill="none"
+							stroke="currentColor"
+							stroke-width="2"
+							stroke-linecap="round"
+							stroke-linejoin="round">
+							<path d="M12 20h.01" />
+							<path d="M2 20h.01" />
+							<path d="M7 20h.01" />
+							<path d="M17 20h.01" />
+							<path d="M22 20h.01" />
+							<path d="M12 14a4 4 0 0 1 4 4" />
+							<path d="M12 10a8 8 0 0 1 8 8" />
+							<path d="M12 6a12 12 0 0 1 12 12" />
+						</svg>
+						<!-- Signal Off -->
+						<svg
+							id="icon-telemetry-off"
+							class="hidden"
+							width="16"
+							height="16"
+							viewBox="0 0 24 24"
+							fill="none"
+							stroke="currentColor"
+							stroke-width="2"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							style="display: none">
+							<line x1="1" y1="1" x2="23" y2="23"></line>
+							<path
+								d="M16.72 11.06A10.94 10.94 0 0 1 19 12.55"></path>
+							<path
+								d="M5 12.55a10.94 10.94 0 0 1 5.17-2.39"></path>
+							<path d="M10.71 5.05A16 16 0 0 1 22.58 9"></path>
+							<path d="M1.42 9a15.91 15.91 0 0 1 4.7-2.88"></path>
+						</svg>
+					</button>
+					<span class="footer-count" id="tech-count"
+						>0 technologies found</span
+					>
+				</div>
 				<button
 					id="btn-missing"
 					class="missing-btn"
@@ -204,6 +252,64 @@
 
 			<!-- Toast -->
 			<div id="toast" class="toast hidden">Copied!</div>
+
+			<!-- Onboarding Overlay -->
+			<div id="onboarding-overlay" class="overlay hidden">
+				<div class="overlay-card">
+					<div class="overlay-icon">
+						<svg
+							width="32"
+							height="32"
+							viewBox="0 0 24 24"
+							fill="none"
+							stroke="currentColor"
+							stroke-width="2"
+							stroke-linecap="round"
+							stroke-linejoin="round">
+							<defs>
+								<linearGradient
+									id="shield-grad"
+									x1="0%"
+									y1="0%"
+									x2="100%"
+									y2="100%">
+									<stop
+										offset="0%"
+										style="
+											stop-color: #0072ff;
+											stop-opacity: 1;
+										" />
+									<stop
+										offset="100%"
+										style="
+											stop-color: #00c6ff;
+											stop-opacity: 1;
+										" />
+								</linearGradient>
+							</defs>
+							<path
+								stroke="url(#shield-grad)"
+								d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+						</svg>
+					</div>
+					<h2>Help the Community?</h2>
+					<p>
+						Share anonymous tech stack data to help us improve
+						detection accuracy.
+					</p>
+					<div class="privacy-note">
+						We do not collect IP coordinates or personal info.
+					</div>
+					<div class="overlay-actions">
+						<button id="btn-accept" class="btn-primary">
+							Enable & Continue
+						</button>
+						<button id="btn-decline" class="btn-secondary">
+							Disable
+						</button>
+					</div>
+				</div>
+			</div>
 		</div>
 
 		<script src="popup.js"></script>

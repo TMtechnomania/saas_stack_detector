@@ -9,546 +9,111 @@
 	if (window.__stackDetectorInjected) return;
 	window.__stackDetectorInjected = true;
 
-	function globalScanner() {
+	// Helper to safely access deep properties (e.g. "google.maps")
+	function getDeepValue(obj, path) {
+		if (!path) return undefined;
+		const parts = path.split(".");
+		let current = obj;
+		for (const part of parts) {
+			if (current === null || typeof current === "undefined")
+				return undefined;
+			current = current[part];
+		}
+		return current;
+	}
+
+	function globalScanner(signatures) {
 		const results = [];
 		const seen = new Set();
 		const win = window;
 
 		function add(item) {
-			if (seen.has(item.name)) return;
-			seen.add(item.name);
+			const id = item.name;
+			if (seen.has(id)) return;
+			seen.add(id);
 			results.push(item);
 		}
 
-		// ────────────────────────────────────────────────────────
-		// 1️⃣ Simple Global Variable Checks
-		// ────────────────────────────────────────────────────────
-		const simpleGlobals = [
-			// Frameworks
-			{
-				v: "__NEXT_DATA__",
-				name: "Next.js",
-				icon: "⚛️",
-				category: "JavaScript Frameworks",
-				website: "https://nextjs.org",
-			},
-			{
-				v: "__NUXT__",
-				name: "Nuxt.js",
-				icon: "💚",
-				category: "JavaScript Frameworks",
-				website: "https://nuxtjs.org",
-			},
-			{
-				v: "$nuxt",
-				name: "Nuxt.js",
-				icon: "💚",
-				category: "JavaScript Frameworks",
-				website: "https://nuxtjs.org",
-			},
-			{
-				v: "__GATSBY",
-				name: "Gatsby",
-				icon: "💜",
-				category: "Static Site Generators",
-				website: "https://www.gatsbyjs.com",
-			},
-			{
-				v: "__SVELTE",
-				name: "Svelte",
-				icon: "🧡",
-				category: "JavaScript Frameworks",
-				website: "https://svelte.dev",
-			},
-			{
-				v: "__remixContext",
-				name: "Remix",
-				icon: "💿",
-				category: "Web Frameworks",
-				website: "https://remix.run",
-			},
-			{
-				v: "__SAPPER__",
-				name: "Sapper",
-				icon: "🧡",
-				category: "Web Frameworks",
-				website: "https://sapper.svelte.dev",
-			},
-			{
-				v: "Turbo",
-				name: "Hotwire Turbo",
-				icon: "⚡",
-				category: "Web Frameworks",
-				website: "https://turbo.hotwired.dev",
-			},
-			{
-				v: "Stimulus",
-				name: "Hotwire Stimulus",
-				icon: "⚡",
-				category: "Web Frameworks",
-				website: "https://stimulus.hotwired.dev",
-			},
-			// Angular ecosystem
-			{
-				v: "Zone",
-				name: "Zone.js",
-				icon: "⚡",
-				category: "JavaScript Libraries",
-			},
-			{
-				v: "angular",
-				name: "AngularJS",
-				icon: "🅰️",
-				category: "JavaScript Frameworks",
-			},
+		if (!signatures || !Array.isArray(signatures)) return results;
 
-			// UI Frameworks
-			{
-				v: "Vuetify",
-				name: "Vuetify",
-				icon: "🎨",
-				category: "UI Frameworks",
-			},
-			{
-				v: "Radix",
-				name: "Radix UI",
-				icon: "🎨",
-				category: "UI Frameworks",
-			},
+		// Iterate through signatures provided by content script
+		signatures.forEach((sig) => {
+			// sig.var is the global variable name (e.g. "jQuery" or "google.maps")
+			if (!sig.var) return;
 
-			// Libraries
-			{
-				v: "d3",
-				name: "D3.js",
-				icon: "📊",
-				category: "JavaScript Graphics",
-			},
-			{
-				v: "lit",
-				name: "Lit",
-				icon: "🔥",
-				category: "JavaScript Libraries",
-				website: "https://lit.dev",
-			},
-			{
-				v: "LitElement",
-				name: "Lit",
-				icon: "🔥",
-				category: "JavaScript Libraries",
-				website: "https://lit.dev",
-			},
-			{
-				v: "__mobxGlobal",
-				name: "MobX",
-				icon: "📦",
-				category: "JavaScript Libraries",
-				website: "https://mobx.js.org",
-			},
-			{
-				v: "Motion",
-				name: "Framer Motion",
-				icon: "✨",
-				category: "JavaScript Libraries",
-				website: "https://www.framer.com/motion",
-			},
-
-			// React ecosystem helpers
-			{
-				v: "React",
-				name: "React",
-				icon: "⚛️",
-				category: "JavaScript Frameworks",
-				website: "https://reactjs.org",
-			},
-			{
-				v: "ReactDOM",
-				name: "React",
-				icon: "⚛️",
-				category: "JavaScript Frameworks",
-				website: "https://reactjs.org",
-			},
-
-			// Tools
-			{
-				v: "__TURBOPACK__",
-				name: "Turbopack",
-				icon: "⚡",
-				category: "Development",
-				website: "https://turbo.build",
-			},
-			{
-				v: "webpackJsonp",
-				name: "Webpack",
-				icon: "📦",
-				category: "Miscellaneous",
-				website: "https://webpack.js.org",
-			},
-			{
-				v: "__vite_is_modern_browser",
-				name: "Vite",
-				icon: "⚡",
-				category: "Miscellaneous",
-				website: "https://vitejs.dev",
-			},
-
-			// Platforms
-			{
-				v: "Shopify",
-				name: "Shopify",
-				icon: "🛒",
-				category: "E-Commerce",
-				website: "https://www.shopify.com",
-			},
-			{
-				v: "Webflow",
-				name: "Webflow",
-				icon: "🎨",
-				category: "Website Builder",
-				website: "https://webflow.com",
-			},
-			{
-				v: "Wix",
-				name: "Wix",
-				icon: "🎨",
-				category: "Website Builder",
-				website: "https://www.wix.com",
-			},
-
-			// Security
-			{
-				v: "grecaptcha",
-				name: "reCAPTCHA",
-				icon: "🛡️",
-				category: "Security",
-				website: "https://www.google.com/recaptcha",
-			},
-			{
-				v: "hcaptcha",
-				name: "hCaptcha",
-				icon: "🛡️",
-				category: "Security",
-				website: "https://www.hcaptcha.com",
-			},
-
-			// Analytics / Feature Management
-			{
-				v: "statsig",
-				name: "Statsig",
-				icon: "📊",
-				category: "Feature Management",
-			},
-			{
-				v: "Statsig",
-				name: "Statsig",
-				icon: "📊",
-				category: "Feature Management",
-			},
-			{
-				v: "segment",
-				name: "Segment",
-				icon: "📊",
-				category: "Analytics",
-			},
-			{
-				v: "analytics",
-				name: "Segment",
-				icon: "📊",
-				category: "Analytics",
-			},
-			{
-				v: "gtag",
-				name: "Google Tag",
-				icon: "📊",
-				category: "Analytics",
-			},
-			{
-				v: "ga",
-				name: "Google Analytics",
-				icon: "📊",
-				category: "Analytics",
-			},
-			{
-				v: "fbq",
-				name: "Facebook Pixel",
-				icon: "📣",
-				category: "Marketing",
-			},
-			{ v: "hj", name: "Hotjar", icon: "📊", category: "Analytics" },
-			{
-				v: "mixpanel",
-				name: "Mixpanel",
-				icon: "📊",
-				category: "Analytics",
-			},
-			{
-				v: "amplitude",
-				name: "Amplitude",
-				icon: "📊",
-				category: "Analytics",
-			},
-			{
-				v: "plausible",
-				name: "Plausible",
-				icon: "📊",
-				category: "Analytics",
-			},
-			{ v: "_paq", name: "Matomo", icon: "📊", category: "Analytics" },
-
-			// Support
-			{
-				v: "Intercom",
-				name: "Intercom",
-				icon: "💬",
-				category: "Live Chat",
-			},
-			{ v: "drift", name: "Drift", icon: "💬", category: "Live Chat" },
-			{
-				v: "$crisp",
-				name: "Crisp Live Chat",
-				icon: "💬",
-				category: "Live Chat",
-			},
-			{
-				v: "Tawk_API",
-				name: "Tawk.to",
-				icon: "💬",
-				category: "Live Chat",
-			},
-			{ v: "zE", name: "Zendesk", icon: "💬", category: "Live Chat" },
-
-			// Error Tracking
-			{
-				v: "Sentry",
-				name: "Sentry",
-				icon: "🐛",
-				category: "Error Tracking",
-			},
-			{
-				v: "_LR",
-				name: "LogRocket",
-				icon: "🐛",
-				category: "Error Tracking",
-			},
-			{
-				v: "Rollbar",
-				name: "Rollbar",
-				icon: "🐛",
-				category: "Error Tracking",
-			},
-			{
-				v: "Bugsnag",
-				name: "Bugsnag",
-				icon: "🐛",
-				category: "Error Tracking",
-			},
-
-			// Payments
-			{ v: "Stripe", name: "Stripe", icon: "💳", category: "Payments" },
-			{ v: "Paddle", name: "Paddle", icon: "💳", category: "Payments" },
-			{
-				v: "Chargebee",
-				name: "Chargebee",
-				icon: "💳",
-				category: "Payments",
-			},
-
-			// Realtime
-			{ v: "Pusher", name: "Pusher", icon: "⚡", category: "Realtime" },
-			{ v: "io", name: "Socket.io", icon: "⚡", category: "Realtime" },
-
-			// Maps
-			{
-				v: "google",
-				check: "maps",
-				name: "Google Maps",
-				icon: "🗺️",
-				category: "Maps",
-			},
-			{ v: "mapboxgl", name: "Mapbox", icon: "🗺️", category: "Maps" },
-			{ v: "L", name: "Leaflet", icon: "🗺️", category: "Maps" },
-		];
-
-		simpleGlobals.forEach((g) => {
 			try {
-				if (typeof win[g.v] !== "undefined" && win[g.v] !== null) {
-					// Check for nested property if strict check needed
-					if (g.check && typeof win[g.v][g.check] === "undefined")
-						return;
+				const val = getDeepValue(win, sig.var);
 
-					// Extraction logic for simple versions (if available on the object directly)
+				if (typeof val !== "undefined" && val !== null) {
+					// Wappalyzer patterns often match against the value of the property
+
 					let version = null;
-					if (win[g.v].version) version = win[g.v].version;
+					let matched = false;
 
-					add({
-						name: g.name,
-						icon: g.icon,
-						category: g.category,
-						method: "Global",
-						version,
-					});
+					if (!sig.pattern) {
+						// Simple existence check
+						matched = true;
+					} else {
+						// Pattern check
+						// If val is a string/number, check regex
+						if (
+							typeof val === "string" ||
+							typeof val === "number"
+						) {
+							const strVal = String(val);
+							try {
+								const regex = new RegExp(sig.pattern, "i");
+								const match = strVal.match(regex);
+								if (match) {
+									matched = true;
+									// Verify if capture group exists for version
+									if (match[1]) version = match[1];
+								}
+							} catch (e) {
+								// Invalid regex or pattern issue
+							}
+						} else {
+							// Value is object/function/array but we have a pattern.
+							matched = true;
+						}
+					}
+
+					if (matched) {
+						add({
+							name: sig.name,
+							icon: sig.icon,
+							category:
+								(sig.categories && sig.categories[0]) ||
+								"JavaScript Libraries",
+							description: sig.description,
+							website: sig.website,
+							version, // Shorthand for version: version
+							method: "Global",
+						});
+					}
 				}
-			} catch (e) {}
+			} catch (e) {
+				// Ignore access errors
+			}
 		});
-
-		// ────────────────────────────────────────────────────────
-		// 2️⃣ Advanced Checks (Prefixes, specific logic)
-		// ────────────────────────────────────────────────────────
-
-		// Webpack Chunk Check
-		try {
-			const wkeys = Object.keys(win).filter((k) =>
-				k.startsWith("webpackChunk"),
-			);
-			if (wkeys.length > 0)
-				add({
-					name: "Webpack",
-					icon: "📦",
-					category: "Miscellaneous",
-					method: "Global",
-				});
-		} catch (e) {}
-
-		// React (fixed: double underscore prefix)
-		try {
-			if (
-				win.__REACT_DEVTOOLS_GLOBAL_HOOK__ ||
-				document.querySelector("[data-reactroot]")
-			) {
-				add({
-					name: "React",
-					icon: "⚛️",
-					category: "JavaScript Frameworks",
-					method: "Global",
-				});
-			}
-		} catch (e) {}
-
-		// Turbopack
-		try {
-			if (win.__TURBOPACK__ || win.__turbopack_require__) {
-				add({
-					name: "Turbopack",
-					icon: "📦",
-					category: "Development",
-					method: "Global",
-				});
-			}
-		} catch (e) {}
-
-		// Angular
-		try {
-			if (win.ng || document.querySelector("[ng-version]")) {
-				add({
-					name: "Angular",
-					icon: "🅰️",
-					category: "JavaScript Frameworks",
-					method: "Global",
-				});
-			}
-		} catch (e) {}
-
-		// Next.js (advanced)
-		try {
-			if (win.next && win.next.version) {
-				add({
-					name: "Next.js",
-					icon: "⚛️",
-					category: "JavaScript Frameworks",
-					version: win.next.version,
-					method: "Global",
-				});
-			}
-		} catch (e) {}
-
-		// core-js
-		try {
-			if (win["__core-js_shared__"]) {
-				let ver = null;
-				if (
-					win["__core-js_shared__"].versions &&
-					win["__core-js_shared__"].versions.length
-				) {
-					ver =
-						win["__core-js_shared__"].versions[
-							win["__core-js_shared__"].versions.length - 1
-						].version;
-				}
-				add({
-					name: "core-js",
-					icon: "📦",
-					category: "JavaScript Libraries",
-					version: ver,
-					method: "Global",
-					website: "https://GitHub.com/zloirock/core-js",
-				});
-			}
-		} catch (e) {}
-
-		// jQuery
-		try {
-			if (win.jQuery || win.$) {
-				const ver =
-					(win.jQuery || win.$).fn ?
-						(win.jQuery || win.$).fn.jquery
-					:	null;
-				if (ver)
-					add({
-						name: "jQuery",
-						icon: "📦",
-						category: "JavaScript Libraries",
-						version: ver,
-						method: "Global",
-						website: "https://jquery.com",
-					});
-			}
-		} catch (e) {}
-
-		// Vue.js
-		try {
-			if (win.Vue) {
-				add({
-					name: "Vue.js",
-					icon: "💚",
-					category: "JavaScript Frameworks",
-					version: win.Vue.version,
-					method: "Global",
-					website: "https://vuejs.org",
-				});
-			}
-		} catch (e) {}
 
 		return results;
 	}
 
-	// ────────────────────────────────────────────────────────
-	// 3️⃣ Polling Mechanism
-	// ────────────────────────────────────────────────────────
+	// Listen for configuration from Content Script
+	window.addEventListener("message", (event) => {
+		if (event.source !== window) return;
+		if (event.data.type === "STACK_DETECTOR_INIT") {
+			const signatures = event.data.signatures || [];
 
-	let previousResultsJSON = "";
+			// Run Scan
+			const results = globalScanner(signatures);
 
-	function runAndNotify() {
-		const results = globalScanner();
-		const currentJSON = JSON.stringify(results);
-
-		if (currentJSON !== previousResultsJSON) {
-			previousResultsJSON = currentJSON;
+			// Return Results
 			window.postMessage(
 				{ type: "STACK_DETECTOR_GLOBALS", data: results },
 				"*",
 			);
 		}
-	}
-
-	// Initial scan
-	runAndNotify();
-
-	// Poll every 2 seconds for 10 seconds (total 5 scans)
-	let attempts = 0;
-	const interval = setInterval(() => {
-		attempts++;
-		runAndNotify();
-		if (attempts >= 5) {
-			clearInterval(interval);
-		}
-	}, 2000);
+	});
 })();

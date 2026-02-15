@@ -2,48 +2,37 @@
    SaaS Stack Detector — Content Script
    Runs on every page load.
    1. Fetches signatures.json
-   2. Scans DOM/Cookies/CSS/Scripts from signatures
-   3. Injects inject.js (Main World scans)
+   2. Scans DOM/Cookies/Meta/Scripts/CSS from signatures
+   3. Injects inject.js (Main World scans) & Configures it
    4. Merges results & updates badge
    ========================================== */
 
 let detectedTech = [];
 let signatures = null;
 
-function toSignatureEntries(signatureSet) {
-	if (!signatureSet) return [];
-
-	if (Array.isArray(signatureSet)) {
-		return signatureSet
-			.filter((item) => item && item.pattern)
-			.map((item) => ({
-				pattern: item.pattern.toLowerCase(),
-				info: item,
-			}));
+// Helper: Check Regex Pattern
+function checkPattern(text, pattern) {
+	try {
+		if (!text || !pattern) return null;
+		const regex = new RegExp(pattern, "i");
+		const match = text.match(regex);
+		if (match) {
+			return {
+				matched: true,
+				version: match[1] || null,
+			};
+		}
+	} catch (e) {
+		// console.warn("Invalid regex:", pattern);
 	}
-
-	return Object.entries(signatureSet)
-		.filter(([, info]) => info)
-		.map(([pattern, info]) => ({
-			pattern: pattern.toLowerCase(),
-			info,
-		}));
+	return null;
 }
 
 // ────────────────────────────────────────────────────────
 // 1️⃣ DOM Scanner (ISOLATED World)
 // ────────────────────────────────────────────────────────
 async function domScanner() {
-	if (!signatures) {
-		try {
-			const url = chrome.runtime.getURL("signatures.json");
-			const response = await fetch(url);
-			signatures = await response.json();
-		} catch (e) {
-			console.error("[StackDetector] Failed to load signatures", e);
-			return [];
-		}
-	}
+	if (!signatures) return [];
 
 	const results = [];
 	const seen = new Set();
@@ -53,250 +42,199 @@ async function domScanner() {
 		results.push(item);
 	}
 
-	// ─── Scripts ───
-	const scripts = document.querySelectorAll("script[src]");
-	const scriptSrcs = Array.from(scripts).map((s) => s.src.toLowerCase());
+	// ─── Scripts (src attributes) ───
+	if (signatures.scripts) {
+		const scripts = document.querySelectorAll("script[src]");
+		const scriptSrcs = Array.from(scripts).map((s) => s.src);
 
-	for (const { pattern, info } of toSignatureEntries(signatures.scripts)) {
-		if (scriptSrcs.some((src) => src.includes(pattern))) {
-			add({ ...info, method: "Script" });
-		}
+		signatures.scripts.forEach((sig) => {
+			if (sig.pattern) {
+				// Check if ANY script src matches the pattern
+				for (const src of scriptSrcs) {
+					const res = checkPattern(src, sig.pattern);
+					if (res) {
+						add({
+							name: sig.name,
+							icon: sig.icon,
+							category:
+								(sig.categories && sig.categories[0]) ||
+								"JavaScript",
+							version: res.version,
+							description: sig.description,
+							website: sig.website,
+							method: "Script Src",
+						});
+						break; // Found this tech, move to next signature
+					}
+				}
+			}
+		});
 	}
 
-	// ─── iFrames ───
-	const iframes = document.querySelectorAll("iframe[src]");
-	const iframeSrcs = Array.from(iframes).map((i) => i.src.toLowerCase());
-
-	for (const { pattern, info } of toSignatureEntries(signatures.iframes)) {
-		if (iframeSrcs.some((src) => src.includes(pattern))) {
-			add({ ...info, method: "iFrame" });
+	// ─── Meta Tags ───
+	if (signatures.meta) {
+		const metaTags = document.getElementsByTagName("meta");
+		const metaMap = {};
+		// Map meta name/property to content
+		for (const meta of metaTags) {
+			const name =
+				meta.getAttribute("name") || meta.getAttribute("property");
+			if (name) {
+				metaMap[name.toLowerCase()] = meta.getAttribute("content");
+			}
 		}
-	}
 
-	// ─── Resources (Link/Img) ───
-	const resources = document.querySelectorAll(
-		"link[href], img[src], source[src], video[src]",
-	);
-	const resourceUrls = Array.from(resources).map((r) =>
-		(r.href || r.src || "").toLowerCase(),
-	);
-	// Scan script srcs as resources too (for CDN detection)
-	const allUrls = [...resourceUrls, ...scriptSrcs];
-
-	for (const { pattern, info } of toSignatureEntries(signatures.resources)) {
-		if (allUrls.some((url) => url.includes(pattern))) {
-			add({ ...info, method: "Resource" });
-		}
+		signatures.meta.forEach((sig) => {
+			const metaName = sig.name; // e.g. "generator"
+			const content = metaMap[metaName];
+			if (content && sig.pattern) {
+				const res = checkPattern(content, sig.pattern);
+				if (res) {
+					add({
+						name: sig.name, // This is the TECH name, not the meta name
+						icon: sig.icon,
+						category:
+							(sig.categories && sig.categories[0]) ||
+							"Miscellaneous",
+						version: res.version,
+						description: sig.description,
+						website: sig.website,
+						method: "Meta Tag",
+					});
+				}
+			}
+		});
 	}
 
 	// ─── Cookies ───
-	const cookieStr = document.cookie || "";
-	(signatures.cookies || []).forEach((sig) => {
-		if (cookieStr.includes(sig.pattern)) {
-			add({ ...sig, method: "Cookie" });
-		}
-	});
+	if (signatures.cookies) {
+		const cookieStr = document.cookie || "";
+		// signatures.cookies.forEach...
+		// Need to parse cookies correctly
+		const cookieValues = {};
+		document.cookie.split(";").forEach((c) => {
+			const parts = c.trim().split("=");
+			if (parts.length >= 2) {
+				cookieValues[parts[0]] = parts.slice(1).join("=");
+			}
+		});
+
+		signatures.cookies.forEach((sig) => {
+			if (cookieValues[sig.cookie]) {
+				const res = checkPattern(cookieValues[sig.cookie], sig.pattern);
+				if (res) {
+					add({
+						name: sig.name,
+						icon: sig.icon,
+						category:
+							(sig.categories && sig.categories[0]) || "Cookie",
+						version: res.version,
+						description: sig.description,
+						website: sig.website,
+						method: "Cookie",
+					});
+				}
+			}
+		});
+	}
 
 	// ─── DOM Selectors ───
-	(signatures.dom || []).forEach((sig) => {
-		try {
-			const el = document.querySelector(sig.selector);
-			if (el) {
-				let version = null;
-				if (sig.versionAttribute) {
-					const attrVal = el.getAttribute(sig.versionAttribute);
-					if (attrVal) {
-						// Try to extract version number (e.g. "WordPress 6.9.1")
-						const match = attrVal.match(
-							/([0-9]+\.[0-9]+(\.[0-9]+)?)/,
-						);
-						if (match) version = match[1];
+	if (signatures.dom) {
+		signatures.dom.forEach((sig) => {
+			try {
+				const els = document.querySelectorAll(sig.selector);
+				if (els.length > 0) {
+					let matched = false;
+					let version = null;
+
+					if (!sig.details) {
+						matched = true;
+					} else {
+						for (const el of els) {
+							let elMatch = true;
+							if (sig.details.text) {
+								const text = el.textContent;
+								const res = checkPattern(
+									text,
+									sig.details.text,
+								);
+								if (!res) elMatch = false;
+								else if (res.version) version = res.version;
+							}
+							if (elMatch && sig.details.attributes) {
+								for (const [attr, pat] of Object.entries(
+									sig.details.attributes,
+								)) {
+									const attrVal = el.getAttribute(attr);
+									if (attrVal === null) {
+										elMatch = false;
+										break;
+									}
+									const res = checkPattern(attrVal, pat);
+									if (!res) {
+										elMatch = false;
+										break;
+									} else if (res.version)
+										version = res.version;
+								}
+							}
+							if (elMatch) {
+								matched = true;
+								break;
+							}
+						}
+					}
+
+					if (matched) {
+						add({
+							name: sig.name,
+							icon: sig.icon,
+							category:
+								(sig.categories && sig.categories[0]) || "DOM",
+							version: version,
+							description: sig.description,
+							website: sig.website,
+							method: "DOM",
+						});
 					}
 				}
+			} catch (e) {
+				// Invalid selector
+			}
+		});
+	}
 
-				if (sig.attribute) {
-					// Check for attribute presence (boolean check)
-					// If strict check needed, we could add logic here
-					add({ ...sig, method: "DOM", version });
-				} else {
-					add({ ...sig, method: "DOM", version });
+	// ─── CSS (Class Names) ───
+	if (signatures.css) {
+		const classSet = new Set();
+		const allEls = document.querySelectorAll("*[class]");
+		const limit = Math.min(allEls.length, 2000);
+		for (let i = 0; i < limit; i++) {
+			const cls = allEls[i].className;
+			if (typeof cls === "string") {
+				cls.split(/\s+/).forEach((c) => classSet.add(c));
+			}
+		}
+
+		signatures.css.forEach((sig) => {
+			for (const c of classSet) {
+				const res = checkPattern(c, sig.pattern);
+				if (res) {
+					add({
+						name: sig.name,
+						icon: sig.icon,
+						category:
+							(sig.categories && sig.categories[0]) || "CSS",
+						version: res.version,
+						description: sig.description,
+						website: sig.website,
+						method: "CSS",
+					});
+					break;
 				}
 			}
-		} catch (e) {}
-	});
-
-	// Vue.js specific (data-v-)
-	const allEls = document.querySelectorAll("*");
-	for (let i = 0; i < Math.min(allEls.length, 500); i++) {
-		const el = allEls[i];
-		for (let j = 0; j < el.attributes.length; j++) {
-			if (el.attributes[j].name.startsWith("data-v-")) {
-				add({
-					name: "Vue.js",
-					icon: "💚",
-					category: "JavaScript Frameworks",
-					method: "DOM",
-				});
-				break;
-			}
-		}
-	}
-	// Radix UI specific
-	if (
-		document.querySelector("[data-radix-collection-item]") ||
-		document.querySelector("[data-radix-popper-content-wrapper]")
-	) {
-		add({
-			name: "Radix UI",
-			icon: "🎨",
-			category: "UI Frameworks",
-			method: "DOM",
 		});
 	}
-	// Framer Motion specific
-	if (document.querySelector("[data-framer-motion-id]")) {
-		add({
-			name: "Framer Motion",
-			icon: "✨",
-			category: "JavaScript Libraries",
-			method: "DOM",
-		});
-	}
-
-	// Lucide icons (broader: lucide- class prefix on SVGs)
-	if (
-		document.querySelector("svg.lucide") ||
-		document.querySelector("[class*='lucide-']")
-	) {
-		add({
-			name: "Lucide",
-			icon: "✏️",
-			category: "Font Scripts",
-			method: "DOM",
-		});
-	}
-
-	// shadcn/ui (data-slot is the v2 pattern; also check for common shadcn class combos)
-	if (document.querySelector("[data-slot]")) {
-		add({
-			name: "shadcn/ui",
-			icon: "🎨",
-			category: "UI Frameworks",
-			method: "DOM",
-		});
-	}
-
-	// HSTS (inferred from CSP meta)
-	if (window.location.protocol === "https:") {
-		const cspMeta = document.querySelector(
-			"meta[http-equiv='Content-Security-Policy']",
-		);
-		if (
-			cspMeta &&
-			cspMeta.content &&
-			cspMeta.content.includes("upgrade-insecure-requests")
-		) {
-			add({
-				name: "HSTS",
-				icon: "🛡️",
-				category: "Security",
-				method: "DOM",
-			});
-		}
-	}
-
-	// Cloudflare (meta detection — cf-* headers exposed as meta)
-	if (
-		document.querySelector("script[src*='cloudflareinsights']") ||
-		document.querySelector("script[data-cf-beacon]")
-	) {
-		add({
-			name: "Cloudflare",
-			icon: "🌐",
-			category: "CDN",
-			method: "Script",
-		});
-	}
-
-	// Priority Hints
-	if (document.querySelector("[fetchpriority]")) {
-		add({
-			name: "Priority Hints",
-			icon: "⚡",
-			category: "Performance",
-			method: "DOM",
-		});
-	}
-
-	// ─── CSS Frameworks ───
-	const classSet = new Set();
-	const clsEls = document.querySelectorAll("[class]");
-	const clsLimit = Math.min(clsEls.length, 1000);
-	for (let i = 0; i < clsLimit; i++) {
-		const cls = clsEls[i].className;
-		if (typeof cls === "string") {
-			cls.split(/\s+/).forEach((c) => {
-				if (c) classSet.add(c);
-			});
-		}
-	}
-	const classList = Array.from(classSet);
-
-	// CSS Frameworks from signatures.json might need custom logic if they are regex-based.
-	// But our JSON has simple "pattern" which is not regex.
-	// For Tailwind/Bootstrap, we implemented specific logic in popup.js.
-	// We'll reimplement that smart logic here.
-
-	// Tailwind
-	const twPatterns = [
-		/^sm:/,
-		/^md:/,
-		/^lg:/,
-		/^xl:/,
-		/^2xl:/,
-		/^hover:/,
-		/^focus:/,
-		/^dark:/,
-	];
-	if (classList.some((c) => twPatterns.some((p) => p.test(c)))) {
-		add({
-			name: "Tailwind CSS",
-			icon: "🎨",
-			category: "CSS Frameworks",
-			method: "CSS",
-		});
-	}
-
-	// Bootstrap
-	const bsPatterns = [
-		/^col-(sm|md|lg|xl)-/,
-		/^btn-/,
-		/^navbar-/,
-		/^container-fluid$/,
-		/^form-control$/,
-	];
-	if (classList.some((c) => bsPatterns.some((p) => p.test(c)))) {
-		add({
-			name: "Bootstrap",
-			icon: "🎨",
-			category: "CSS Frameworks",
-			method: "CSS",
-		});
-	}
-
-	// Semantic UI, Bulma, Foundation, etc from JSON?
-	// The JSON has prefixes. Let's use them.
-	(signatures.css || []).forEach((sig) => {
-		if (sig.prefixes && Array.isArray(sig.prefixes)) {
-			let hits = 0;
-			sig.prefixes.forEach((pre) => {
-				if (classList.some((c) => c.startsWith(pre))) hits++;
-			});
-			if (hits >= 1) {
-				add({ ...sig, method: "CSS" });
-			}
-		}
-	});
 
 	return results;
 }
@@ -309,16 +247,16 @@ function injectMainWorldScript() {
 	script.src = chrome.runtime.getURL("inject.js");
 	script.onload = function () {
 		this.remove();
+		if (signatures && signatures.globals) {
+			window.postMessage(
+				{ type: "STACK_DETECTOR_INIT", signatures: signatures.globals },
+				"*",
+			);
+		}
 	};
 	(document.head || document.documentElement).appendChild(script);
 }
 
-async function runScan() {
-	const domResults = await domScanner();
-	// We wait for global results via message
-}
-
-// Listen for Main World results
 // Listen for Main World results
 let lastBadgeCount = 0;
 window.addEventListener("message", async (event) => {
@@ -327,7 +265,9 @@ window.addEventListener("message", async (event) => {
 
 	if (event.data.type && event.data.type === "STACK_DETECTOR_GLOBALS") {
 		const globalResults = event.data.data;
-		const domResults = await domScanner(); // Run DOM scan now
+
+		// Run DOM scan now that we have globals
+		const domResults = await domScanner();
 
 		// Fetch header detections from background
 		let headerResults = [];
@@ -353,6 +293,9 @@ window.addEventListener("message", async (event) => {
 			} else {
 				const ex = map.get(item.name);
 				if (!ex.version && item.version) ex.version = item.version;
+				if (!ex.description && item.description)
+					ex.description = item.description;
+				if (!ex.website && item.website) ex.website = item.website;
 			}
 		});
 
@@ -364,6 +307,7 @@ window.addEventListener("message", async (event) => {
 			chrome.runtime.sendMessage({
 				type: "updateBadge",
 				count: lastBadgeCount,
+				detections: detectedTech,
 			});
 		}
 	}
@@ -377,5 +321,19 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 	}
 });
 
-// Start
-injectMainWorldScript();
+// ────────────────────────────────────────────────────────
+// Initialization
+// ────────────────────────────────────────────────────────
+async function init() {
+	try {
+		const url = chrome.runtime.getURL("signatures.json");
+		const response = await fetch(url);
+		signatures = await response.json();
+	} catch (e) {
+		console.error("[StackDetector] Failed to load signatures", e);
+	}
+
+	injectMainWorldScript();
+}
+
+init();

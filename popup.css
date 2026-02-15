@@ -41,6 +41,9 @@
   /* Amber 500 */
   --danger: #ef4444;
   /* Red 500 */
+  --telemetry-on: #3fb950;
+  --telemetry-off: #cbd5e1;
+  /* Slate 300 - Much brighter for visibility */
 
   /* UI */
   --radius: 8px;
@@ -72,6 +75,9 @@
 
   --primary-glow: rgba(0, 114, 255, 0.15);
   --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+
+  --telemetry-off: #64748b;
+  /* Darker for light mode */
 }
 
 /* Icon Toggling */
@@ -83,12 +89,21 @@
   display: block;
 }
 
-:root:not([data-theme="light"]) .icon-sun {
+:not([data-theme="light"]) .icon-sun {
   display: block;
 }
 
-:root:not([data-theme="light"]) .icon-moon {
+:not([data-theme="light"]) .icon-moon {
   display: none;
+}
+
+/* Telemetry Colors */
+#icon-telemetry-on {
+  color: var(--telemetry-on);
+}
+
+#icon-telemetry-off {
+  color: var(--telemetry-off);
 }
 
 /* Reset */
@@ -393,6 +408,19 @@ body {
   justify-content: space-between;
 }
 
+.footer-left {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+
+.footer-btn {
+  width: 24px;
+  height: 24px;
+  padding: 4px;
+}
+
 .footer-count {
   font-size: 0.75rem;
   color: var(--text-muted);
@@ -470,4 +498,101 @@ body {
 .toast.show {
   opacity: 1;
   transform: translateX(-50%) translateY(0);
+}
+
+/* ─── Onboarding Overlay ─── */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  backdrop-filter: blur(2px);
+  transition: opacity 0.3s;
+}
+
+.overlay.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.overlay-card {
+  background: var(--bg-card);
+  /* Match card theme */
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  max-width: 320px;
+}
+
+.overlay-icon {
+  margin-bottom: 16px;
+  color: var(--telemetry-on);
+  /* Use green */
+}
+
+.overlay-card h2 {
+  font-size: 18px;
+  margin-bottom: 8px;
+  color: var(--text-main);
+}
+
+.overlay-card p {
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+
+.privacy-note {
+  font-size: 11px;
+  color: var(--text-faint);
+  margin-top: 12px;
+  opacity: 0.7;
+}
+
+.overlay-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 13px;
+  transition: opacity 0.2s;
+}
+
+.btn-primary:hover {
+  opacity: 0.9;
+}
+
+.btn-secondary {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  padding: 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: background 0.2s;
+}
+
+.btn-secondary:hover {
+  background: var(--bg-card-hover);
+  color: var(--text-main);
 }

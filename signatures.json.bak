@@ -1,0 +1,1498 @@
+{
+	"scripts": {
+		"js.stripe.com": {
+			"name": "Stripe",
+			"icon": "💳",
+			"category": "Payments",
+			"website": "https://stripe.com"
+		},
+		"checkout.razorpay.com": {
+			"name": "Razorpay",
+			"icon": "💳",
+			"category": "Payments",
+			"website": "https://razorpay.com"
+		},
+		"js.braintreegateway.com": {
+			"name": "Braintree",
+			"icon": "💳",
+			"category": "Payments",
+			"website": "https://braintreepayments.com"
+		},
+		"cdn.paddle.com": {
+			"name": "Paddle",
+			"icon": "💳",
+			"category": "Payments",
+			"website": "https://paddle.com"
+		},
+		"app.lemonsqueezy.com": {
+			"name": "Lemon Squeezy",
+			"icon": "💳",
+			"category": "Payments",
+			"website": "https://lemonsqueezy.com"
+		},
+		"js.chargebee.com": {
+			"name": "Chargebee",
+			"icon": "💳",
+			"category": "Payments",
+			"website": "https://chargebee.com"
+		},
+		"js.recurly.com": {
+			"name": "Recurly",
+			"icon": "💳",
+			"category": "Payments",
+			"website": "https://recurly.com"
+		},
+		"js.paystack.co": {
+			"name": "Paystack",
+			"icon": "💳",
+			"category": "Payments",
+			"website": "https://paystack.com"
+		},
+		"js.squareup.com": {
+			"name": "Square",
+			"icon": "💳",
+			"category": "Payments",
+			"website": "https://squareup.com"
+		},
+		"cdn.segment.com": {
+			"name": "Segment",
+			"icon": "📊",
+			"category": "Analytics",
+			"website": "https://segment.com"
+		},
+		"cdn.amplitude.com": {
+			"name": "Amplitude",
+			"icon": "📊",
+			"category": "Analytics",
+			"website": "https://amplitude.com"
+		},
+		"cdn.mxpnl.com": {
+			"name": "Mixpanel",
+			"icon": "📊",
+			"category": "Analytics",
+			"website": "https://mixpanel.com"
+		},
+		"plausible.io": {
+			"name": "Plausible",
+			"icon": "📊",
+			"category": "Analytics",
+			"website": "https://plausible.io"
+		},
+		"www.google-analytics.com": {
+			"name": "Google Analytics",
+			"icon": "📊",
+			"category": "Analytics",
+			"website": "https://analytics.google.com"
+		},
+		"www.googletagmanager.com": {
+			"name": "Google Tag Manager",
+			"icon": "🏷️",
+			"category": "Tag Managers",
+			"website": "https://tagmanager.google.com"
+		},
+		"static.hotjar.com": {
+			"name": "Hotjar",
+			"icon": "📊",
+			"category": "Analytics",
+			"website": "https://hotjar.com"
+		},
+		"cdn.heapanalytics.com": {
+			"name": "Heap",
+			"icon": "📊",
+			"category": "Analytics",
+			"website": "https://heap.io"
+		},
+		"cdn.usefathom.com": {
+			"name": "Fathom",
+			"icon": "📊",
+			"category": "Analytics",
+			"website": "https://usefathom.com"
+		},
+		"scripts.simpleanalyticscdn.com": {
+			"name": "Simple Analytics",
+			"icon": "📊",
+			"category": "Analytics",
+			"website": "https://simpleanalytics.com"
+		},
+		"cdn.mouseflow.com": {
+			"name": "Mouseflow",
+			"icon": "📊",
+			"category": "Analytics",
+			"website": "https://mouseflow.com"
+		},
+		"cdn.cookielaw.org": {
+			"name": "OneTrust",
+			"icon": "🍪",
+			"category": "Cookie Compliance",
+			"website": "https://onetrust.com"
+		},
+		"web.cmp.usercentrics.eu": {
+			"name": "Usercentrics",
+			"icon": "🍪",
+			"category": "Cookie Compliance",
+			"website": "https://usercentrics.com"
+		},
+		"js.hs-scripts.com": {
+			"name": "HubSpot",
+			"icon": "📣",
+			"category": "Marketing",
+			"website": "https://hubspot.com"
+		},
+		"js.hsforms.net": {
+			"name": "HubSpot Forms",
+			"icon": "📣",
+			"category": "Marketing",
+			"website": "https://hubspot.com"
+		},
+		"connect.facebook.net": {
+			"name": "Facebook Pixel",
+			"icon": "📣",
+			"category": "Marketing",
+			"website": "https://facebook.com/business"
+		},
+		"snap.licdn.com": {
+			"name": "LinkedIn Insight",
+			"icon": "📣",
+			"category": "Marketing",
+			"website": "https://linkedin.com"
+		},
+		"static.ads-twitter.com": {
+			"name": "Twitter Pixel",
+			"icon": "📣",
+			"category": "Marketing",
+			"website": "https://ads.twitter.com"
+		},
+		"js.convertflow.co": {
+			"name": "ConvertFlow",
+			"icon": "📣",
+			"category": "Marketing",
+			"website": "https://convertflow.com"
+		},
+		"widget.gleam.io": {
+			"name": "Gleam",
+			"icon": "📣",
+			"category": "Marketing",
+			"website": "https://gleam.io"
+		},
+		"cdn.optimizely.com": {
+			"name": "Optimizely",
+			"icon": "📣",
+			"category": "A/B Testing",
+			"website": "https://optimizely.com"
+		},
+		"widget.intercom.io": {
+			"name": "Intercom",
+			"icon": "💬",
+			"category": "Live Chat",
+			"website": "https://intercom.com"
+		},
+		"js.intercomcdn.com": {
+			"name": "Intercom",
+			"icon": "💬",
+			"category": "Live Chat",
+			"website": "https://intercom.com"
+		},
+		"embed.tawk.to": {
+			"name": "Tawk.to",
+			"icon": "💬",
+			"category": "Live Chat",
+			"website": "https://tawk.to"
+		},
+		"static.zdassets.com": {
+			"name": "Zendesk",
+			"icon": "💬",
+			"category": "Live Chat",
+			"website": "https://zendesk.com"
+		},
+		"js.driftt.com": {
+			"name": "Drift",
+			"icon": "💬",
+			"category": "Live Chat",
+			"website": "https://drift.com"
+		},
+		"cdn.crisp.chat": {
+			"name": "Crisp Live Chat",
+			"icon": "💬",
+			"category": "Live Chat",
+			"website": "https://crisp.chat"
+		},
+		"client.crisp.chat": {
+			"name": "Crisp Live Chat",
+			"icon": "💬",
+			"category": "Live Chat",
+			"website": "https://crisp.chat"
+		},
+		"js.freshchat.com": {
+			"name": "Freshchat",
+			"icon": "💬",
+			"category": "Live Chat",
+			"website": "https://freshchat.com"
+		},
+		"cdn.shopify.com": {
+			"name": "Shopify",
+			"icon": "🛒",
+			"category": "E-Commerce",
+			"website": "https://shopify.com"
+		},
+		"static.bigcommerce.com": {
+			"name": "BigCommerce",
+			"icon": "🛒",
+			"category": "E-Commerce",
+			"website": "https://bigcommerce.com"
+		},
+		"js.sentry-cdn.com": {
+			"name": "Sentry",
+			"icon": "🐛",
+			"category": "Error Tracking",
+			"website": "https://sentry.io"
+		},
+		"browser.sentry-cdn.com": {
+			"name": "Sentry",
+			"icon": "🐛",
+			"category": "Error Tracking",
+			"website": "https://sentry.io"
+		},
+		"cdn.logrocket.io": {
+			"name": "LogRocket",
+			"icon": "🐛",
+			"category": "Error Tracking",
+			"website": "https://logrocket.com"
+		},
+		"cdn.bugsnag.com": {
+			"name": "Bugsnag",
+			"icon": "🐛",
+			"category": "Error Tracking",
+			"website": "https://bugsnag.com"
+		},
+		"cdn.rollbar.com": {
+			"name": "Rollbar",
+			"icon": "🐛",
+			"category": "Error Tracking",
+			"website": "https://rollbar.com"
+		},
+		"js.pusher.com": {
+			"name": "Pusher",
+			"icon": "⚡",
+			"category": "Realtime",
+			"website": "https://pusher.com"
+		},
+		"cdn.firebase.com": {
+			"name": "Firebase",
+			"icon": "🔥",
+			"category": "Backend",
+			"website": "https://firebase.google.com"
+		},
+		"www.gstatic.com/firebasejs": {
+			"name": "Firebase",
+			"icon": "🔥",
+			"category": "Backend",
+			"website": "https://firebase.google.com"
+		},
+		"supabase.co": {
+			"name": "Supabase",
+			"icon": "⚡",
+			"category": "Backend",
+			"website": "https://supabase.com"
+		},
+		"cdn.jsdelivr.net/npm/@supabase": {
+			"name": "Supabase",
+			"icon": "⚡",
+			"category": "Backend",
+			"website": "https://supabase.com"
+		},
+		"appwrite.io": {
+			"name": "Appwrite",
+			"icon": "⚡",
+			"category": "Backend",
+			"website": "https://appwrite.io"
+		},
+		"cdn.auth0.com": {
+			"name": "Auth0",
+			"icon": "🔐",
+			"category": "Auth",
+			"website": "https://auth0.com"
+		},
+		"apis.google.com": {
+			"name": "Google APIs",
+			"icon": "🔐",
+			"category": "Auth",
+			"website": "https://developers.google.com"
+		},
+		"js.clerk.dev": {
+			"name": "Clerk",
+			"icon": "🔐",
+			"category": "Auth",
+			"website": "https://clerk.com"
+		},
+		"accounts.google.com/gsi": {
+			"name": "Google Sign-In",
+			"icon": "🔐",
+			"category": "Auth",
+			"website": "https://developers.google.com"
+		},
+		"challenges.cloudflare.com": {
+			"name": "Cloudflare Turnstile",
+			"icon": "🛡️",
+			"category": "Security",
+			"website": "https://cloudflare.com"
+		},
+		"www.google.com/recaptcha": {
+			"name": "reCAPTCHA",
+			"icon": "🛡️",
+			"category": "Security",
+			"website": "https://google.com/recaptcha"
+		},
+		"www.gstatic.com/recaptcha": {
+			"name": "reCAPTCHA",
+			"icon": "🛡️",
+			"category": "Security",
+			"website": "https://google.com/recaptcha"
+		},
+		"hcaptcha.com": {
+			"name": "hCaptcha",
+			"icon": "🛡️",
+			"category": "Security",
+			"website": "https://hcaptcha.com"
+		},
+		"cdn.tiny.cloud": {
+			"name": "TinyMCE",
+			"icon": "✏️",
+			"category": "Rich Text Editors",
+			"website": "https://tiny.cloud"
+		},
+		"cdn.ckeditor.com": {
+			"name": "CKEditor",
+			"icon": "✏️",
+			"category": "Rich Text Editors",
+			"website": "https://ckeditor.com"
+		},
+		"static.klaviyo.com": {
+			"name": "Klaviyo",
+			"icon": "📧",
+			"category": "Email",
+			"website": "https://klaviyo.com"
+		},
+		"js.mailchimp.com": {
+			"name": "Mailchimp",
+			"icon": "📧",
+			"category": "Email",
+			"website": "https://mailchimp.com"
+		},
+		"cdn.sendgrid.com": {
+			"name": "SendGrid",
+			"icon": "📧",
+			"category": "Email",
+			"website": "https://sendgrid.com"
+		},
+		"cdn.jsdelivr.net": {
+			"name": "jsDelivr CDN",
+			"icon": "🌐",
+			"category": "CDN",
+			"website": "https://jsdelivr.com"
+		},
+		"cdnjs.cloudflare.com": {
+			"name": "Cloudflare CDN",
+			"icon": "🌐",
+			"category": "CDN",
+			"website": "https://cdnjs.com"
+		},
+		"unpkg.com": {
+			"name": "UNPKG",
+			"icon": "🌐",
+			"category": "CDN",
+			"website": "https://unpkg.com"
+		},
+		"player.vimeo.com": {
+			"name": "Vimeo",
+			"icon": "▶️",
+			"category": "Video Players",
+			"website": "https://vimeo.com"
+		},
+		"www.youtube.com/iframe_api": {
+			"name": "YouTube",
+			"icon": "▶️",
+			"category": "Video Players",
+			"website": "https://youtube.com"
+		},
+		"fast.wistia.com": {
+			"name": "Wistia",
+			"icon": "▶️",
+			"category": "Video Players",
+			"website": "https://wistia.com"
+		},
+		"maps.googleapis.com": {
+			"name": "Google Maps",
+			"icon": "🗺️",
+			"category": "Maps",
+			"website": "https://maps.google.com"
+		},
+		"api.mapbox.com": {
+			"name": "Mapbox",
+			"icon": "🗺️",
+			"category": "Maps",
+			"website": "https://mapbox.com"
+		},
+		"embed.typeform.com": {
+			"name": "Typeform",
+			"icon": "📝",
+			"category": "Form Builders",
+			"website": "https://typeform.com"
+		},
+		"assets.calendly.com": {
+			"name": "Calendly",
+			"icon": "📅",
+			"category": "Scheduling",
+			"website": "https://calendly.com"
+		},
+		"uptimerobot.com": {
+			"name": "UptimeRobot",
+			"icon": "⏱️",
+			"category": "Issue Trackers",
+			"website": "https://uptimerobot.com"
+		},
+		"sc-static.net": {
+			"name": "Snapchat Pixel",
+			"icon": "📣",
+			"category": "Marketing",
+			"website": "https://forbusiness.snapchat.com"
+		},
+		"static.cloudflareinsights.com": {
+			"name": "Cloudflare Browser Insights",
+			"icon": "🌐",
+			"category": "Analytics",
+			"website": "https://cloudflare.com"
+		},
+		"cloudflareinsights.com/beacon": {
+			"name": "Cloudflare Browser Insights",
+			"icon": "🌐",
+			"category": "Analytics",
+			"website": "https://cloudflare.com"
+		},
+		"analytics.tiktok.com": {
+			"name": "TikTok Pixel",
+			"icon": "🎵",
+			"category": "Marketing",
+			"website": "https://ads.tiktok.com"
+		},
+		"code.tidio.co": {
+			"name": "Tidio",
+			"icon": "💬",
+			"category": "Live Chat",
+			"website": "https://tidio.com"
+		},
+		"www.googletagservices.com": {
+			"name": "Google Ads",
+			"icon": "📣",
+			"category": "Advertising",
+			"website": "https://ads.google.com"
+		},
+		"script.crazyegg.com": {
+			"name": "Crazy Egg",
+			"icon": "🥚",
+			"category": "Analytics",
+			"website": "https://crazyegg.com"
+		},
+		"pi.pardot.com": {
+			"name": "Pardot",
+			"icon": "📈",
+			"category": "Marketing Automation",
+			"website": "https://pardot.com"
+		}
+	},
+	"globals": [
+		{
+			"variable": "__NEXT_DATA__",
+			"name": "Next.js",
+			"icon": "⚛️",
+			"category": "JavaScript Frameworks",
+			"website": "https://nextjs.org"
+		},
+		{
+			"variable": "Zone",
+			"name": "Zone.js",
+			"icon": "⚡",
+			"category": "JavaScript Libraries",
+			"website": "https://github.com/angular/zone.js"
+		},
+		{
+			"variable": "angular",
+			"name": "AngularJS",
+			"icon": "🅰️",
+			"category": "JavaScript Frameworks",
+			"website": "https://angularjs.org"
+		},
+		{
+			"variable": "__NUXT__",
+			"name": "Nuxt.js",
+			"icon": "💚",
+			"category": "JavaScript Frameworks",
+			"website": "https://nuxt.com"
+		},
+		{
+			"variable": "$nuxt",
+			"name": "Nuxt.js",
+			"icon": "💚",
+			"category": "JavaScript Frameworks",
+			"website": "https://nuxt.com"
+		},
+		{
+			"variable": "__GATSBY",
+			"name": "Gatsby",
+			"icon": "💜",
+			"category": "Static Site Generators",
+			"website": "https://gatsbyjs.com"
+		},
+		{
+			"variable": "__SVELTE",
+			"name": "Svelte",
+			"icon": "🧡",
+			"category": "JavaScript Frameworks",
+			"website": "https://svelte.dev"
+		},
+		{
+			"variable": "__remixContext",
+			"name": "Remix",
+			"icon": "💿",
+			"category": "Web Frameworks",
+			"website": "https://remix.run"
+		},
+		{
+			"variable": "Vue",
+			"name": "Vue.js",
+			"icon": "💚",
+			"category": "JavaScript Frameworks",
+			"website": "https://vuejs.org"
+		},
+		{
+			"variable": "React",
+			"name": "React",
+			"icon": "⚛️",
+			"category": "JavaScript Frameworks",
+			"website": "https://react.dev"
+		},
+		{
+			"variable": "Vuetify",
+			"name": "Vuetify",
+			"icon": "🎨",
+			"category": "UI Frameworks",
+			"website": "https://vuetifyjs.com"
+		},
+		{
+			"variable": "webpackJsonp",
+			"name": "Webpack",
+			"icon": "📦",
+			"category": "Miscellaneous",
+			"website": "https://webpack.js.org"
+		},
+		{
+			"variable": "__vite_is_modern_browser",
+			"name": "Vite",
+			"icon": "⚡",
+			"category": "Miscellaneous",
+			"website": "https://vitejs.dev"
+		},
+		{
+			"variable": "Shopify",
+			"name": "Shopify",
+			"icon": "🛒",
+			"category": "E-Commerce",
+			"website": "https://shopify.com"
+		},
+		{
+			"variable": "Webflow",
+			"name": "Webflow",
+			"icon": "🎨",
+			"category": "Website Builder",
+			"website": "https://webflow.com"
+		},
+		{
+			"variable": "Wix",
+			"name": "Wix",
+			"icon": "🎨",
+			"category": "Website Builder",
+			"website": "https://wix.com"
+		},
+		{
+			"variable": "grecaptcha",
+			"name": "reCAPTCHA",
+			"icon": "🛡️",
+			"category": "Security",
+			"website": "https://google.com/recaptcha"
+		},
+		{
+			"variable": "Intercom",
+			"name": "Intercom",
+			"icon": "💬",
+			"category": "Live Chat",
+			"website": "https://intercom.com"
+		},
+		{
+			"variable": "drift",
+			"name": "Drift",
+			"icon": "💬",
+			"category": "Live Chat",
+			"website": "https://drift.com"
+		},
+		{
+			"variable": "$crisp",
+			"name": "Crisp Live Chat",
+			"icon": "💬",
+			"category": "Live Chat",
+			"website": "https://crisp.chat"
+		},
+		{
+			"variable": "CRISP_WEBSITE_ID",
+			"name": "Crisp Live Chat",
+			"icon": "💬",
+			"category": "Live Chat",
+			"website": "https://crisp.chat"
+		},
+		{
+			"variable": "Tawk_API",
+			"name": "Tawk.to",
+			"icon": "💬",
+			"category": "Live Chat",
+			"website": "https://tawk.to"
+		},
+		{
+			"variable": "zE",
+			"name": "Zendesk",
+			"icon": "💬",
+			"category": "Live Chat",
+			"website": "https://zendesk.com"
+		},
+		{
+			"variable": "gtag",
+			"name": "Google Tag",
+			"icon": "📊",
+			"category": "Analytics",
+			"website": "https://tagmanager.google.com"
+		},
+		{
+			"variable": "ga",
+			"name": "Google Analytics",
+			"icon": "📊",
+			"category": "Analytics",
+			"website": "https://analytics.google.com"
+		},
+		{
+			"variable": "fbq",
+			"name": "Facebook Pixel",
+			"icon": "📣",
+			"category": "Marketing",
+			"website": "https://facebook.com/business"
+		},
+		{
+			"variable": "hj",
+			"name": "Hotjar",
+			"icon": "📊",
+			"category": "Analytics",
+			"website": "https://hotjar.com"
+		},
+		{
+			"variable": "mixpanel",
+			"name": "Mixpanel",
+			"icon": "📊",
+			"category": "Analytics",
+			"website": "https://mixpanel.com"
+		},
+		{
+			"variable": "amplitude",
+			"name": "Amplitude",
+			"icon": "📊",
+			"category": "Analytics",
+			"website": "https://amplitude.com"
+		},
+		{
+			"variable": "analytics",
+			"name": "Segment",
+			"icon": "📊",
+			"category": "Analytics",
+			"website": "https://segment.com"
+		},
+		{
+			"variable": "_paq",
+			"name": "Matomo",
+			"icon": "📊",
+			"category": "Analytics",
+			"website": "https://matomo.org"
+		},
+		{
+			"variable": "Sentry",
+			"name": "Sentry",
+			"icon": "🐛",
+			"category": "Error Tracking",
+			"website": "https://sentry.io"
+		},
+		{
+			"variable": "_LR",
+			"name": "LogRocket",
+			"icon": "🐛",
+			"category": "Error Tracking",
+			"website": "https://logrocket.com"
+		},
+		{
+			"variable": "Rollbar",
+			"name": "Rollbar",
+			"icon": "🐛",
+			"category": "Error Tracking",
+			"website": "https://rollbar.com"
+		},
+		{
+			"variable": "Bugsnag",
+			"name": "Bugsnag",
+			"icon": "🐛",
+			"category": "Error Tracking",
+			"website": "https://bugsnag.com"
+		},
+		{
+			"variable": "Stripe",
+			"name": "Stripe",
+			"icon": "💳",
+			"category": "Payments",
+			"website": "https://stripe.com"
+		},
+		{
+			"variable": "Paddle",
+			"name": "Paddle",
+			"icon": "💳",
+			"category": "Payments",
+			"website": "https://paddle.com"
+		},
+		{
+			"variable": "Chargebee",
+			"name": "Chargebee",
+			"icon": "💳",
+			"category": "Payments",
+			"website": "https://chargebee.com"
+		},
+		{
+			"variable": "Pusher",
+			"name": "Pusher",
+			"icon": "⚡",
+			"category": "Realtime",
+			"website": "https://pusher.com"
+		},
+		{
+			"variable": "jQuery",
+			"name": "jQuery",
+			"icon": "📦",
+			"category": "JavaScript Libraries",
+			"website": "https://jquery.com"
+		},
+		{
+			"variable": "gsap",
+			"name": "GSAP",
+			"icon": "🎬",
+			"category": "JavaScript Libraries",
+			"website": "https://gsap.com"
+		},
+		{
+			"variable": "d3",
+			"name": "D3.js",
+			"icon": "📊",
+			"category": "JavaScript Graphics",
+			"website": "https://d3js.org"
+		},
+		{
+			"variable": "THREE",
+			"name": "Three.js",
+			"icon": "🎮",
+			"category": "JavaScript Graphics",
+			"website": "https://threejs.org"
+		},
+		{
+			"variable": "mapboxgl",
+			"name": "Mapbox",
+			"icon": "🗺️",
+			"category": "Maps",
+			"website": "https://mapbox.com"
+		},
+		{
+			"variable": "Alpine",
+			"name": "Alpine.js",
+			"icon": "🏔️",
+			"category": "JavaScript Frameworks",
+			"website": "https://alpinejs.dev"
+		},
+		{
+			"variable": "htmx",
+			"name": "htmx",
+			"icon": "mj",
+			"category": "JavaScript Libraries",
+			"website": "https://htmx.org"
+		},
+		{
+			"variable": "Livewire",
+			"name": "Laravel Livewire",
+			"icon": "j",
+			"category": "JavaScript Frameworks",
+			"website": "https://laravel-livewire.com"
+		},
+		{
+			"variable": "preact",
+			"name": "Preact",
+			"icon": "⚛️",
+			"category": "JavaScript Frameworks",
+			"website": "https://preactjs.com"
+		},
+		{
+			"variable": "posthog",
+			"name": "PostHog",
+			"icon": "dg",
+			"category": "Analytics",
+			"website": "https://posthog.com"
+		},
+		{
+			"variable": "FS",
+			"name": "FullStory",
+			"icon": "🎥",
+			"category": "Analytics",
+			"website": "https://fullstory.com"
+		},
+		{
+			"variable": "clarity",
+			"name": "Microsoft Clarity",
+			"icon": "🔍",
+			"category": "Analytics",
+			"website": "https://clarity.microsoft.com"
+		},
+		{
+			"variable": "NREUM",
+			"name": "New Relic",
+			"icon": "📉",
+			"category": "Performance",
+			"website": "https://newrelic.com"
+		},
+		{
+			"variable": "DD_RUM",
+			"name": "Datadog",
+			"icon": "🐶",
+			"category": "Performance",
+			"website": "https://datadoghq.com"
+		},
+		{
+			"variable": "algoliasearch",
+			"name": "Algolia",
+			"icon": "🔍",
+			"category": "Search",
+			"website": "https://algolia.com"
+		},
+		{
+			"variable": "HScout",
+			"name": "Help Scout",
+			"icon": "📫",
+			"category": "Customer Support",
+			"website": "https://helpscout.com"
+		},
+		{
+			"variable": "LiveChatWidget",
+			"name": "LiveChat",
+			"icon": "💬",
+			"category": "Live Chat",
+			"website": "https://livechat.com"
+		},
+		{
+			"variable": "olark",
+			"name": "Olark",
+			"icon": "💬",
+			"category": "Live Chat",
+			"website": "https://olark.com"
+		},
+		{
+			"variable": "ttq",
+			"name": "TikTok Pixel",
+			"icon": "🎵",
+			"category": "Marketing",
+			"website": "https://ads.tiktok.com"
+		},
+		{
+			"variable": "pintrk",
+			"name": "Pinterest Tag",
+			"icon": "📌",
+			"category": "Marketing",
+			"website": "https://ads.pinterest.com"
+		},
+		{
+			"variable": "Munchkin",
+			"name": "Marketo",
+			"icon": "📊",
+			"category": "Marketing Automation",
+			"website": "https://marketo.com"
+		},
+		{
+			"variable": "DISQUS",
+			"name": "Disqus",
+			"icon": "💬",
+			"category": "Comments",
+			"website": "https://disqus.com"
+		},
+		{
+			"variable": "Yotpo",
+			"name": "Yotpo",
+			"icon": "⭐",
+			"category": "Reviews",
+			"website": "https://yotpo.com"
+		},
+		{
+			"variable": "Recharge",
+			"name": "Recharge",
+			"icon": "🔄",
+			"category": "Payments",
+			"website": "https://rechargepayments.com"
+		}
+	],
+	"dom": [
+		{
+			"selector": "meta[name='generator'][content*='WordPress']",
+			"name": "WordPress",
+			"icon": "📝",
+			"category": "CMS",
+			"website": "https://wordpress.org",
+			"versionAttribute": "content"
+		},
+		{
+			"selector": "meta[name='generator'][content*='Webflow']",
+			"name": "Webflow",
+			"icon": "🎨",
+			"category": "Website Builder",
+			"website": "https://webflow.com",
+			"versionAttribute": "content"
+		},
+		{
+			"selector": "meta[name='generator'][content*='Wix']",
+			"name": "Wix",
+			"icon": "🎨",
+			"category": "Website Builder",
+			"website": "https://wix.com",
+			"versionAttribute": "content"
+		},
+		{
+			"selector": "meta[name='generator'][content*='Squarespace']",
+			"name": "Squarespace",
+			"icon": "🎨",
+			"category": "Website Builder",
+			"website": "https://squarespace.com",
+			"versionAttribute": "content"
+		},
+		{
+			"selector": "meta[name='generator'][content*='Ghost']",
+			"name": "Ghost",
+			"icon": "📝",
+			"category": "CMS",
+			"website": "https://ghost.org",
+			"versionAttribute": "content"
+		},
+		{
+			"selector": "meta[name='generator'][content*='Hugo']",
+			"name": "Hugo",
+			"icon": "📝",
+			"category": "Static Site Generators",
+			"website": "https://gohugo.io",
+			"versionAttribute": "content"
+		},
+		{
+			"selector": "meta[name='generator'][content*='Jekyll']",
+			"name": "Jekyll",
+			"icon": "📝",
+			"category": "Static Site Generators",
+			"website": "https://jekyllrb.com",
+			"versionAttribute": "content"
+		},
+		{
+			"selector": "meta[name='generator'][content*='Gatsby']",
+			"name": "Gatsby",
+			"icon": "💜",
+			"category": "Static Site Generators",
+			"website": "https://gatsbyjs.com",
+			"versionAttribute": "content"
+		},
+		{
+			"selector": "meta[name='generator'][content*='Drupal']",
+			"name": "Drupal",
+			"icon": "📝",
+			"category": "CMS",
+			"website": "https://drupal.org",
+			"versionAttribute": "content"
+		},
+		{
+			"selector": "meta[name='generator'][content*='Joomla']",
+			"name": "Joomla",
+			"icon": "📝",
+			"category": "CMS",
+			"website": "https://joomla.org",
+			"versionAttribute": "content"
+		},
+		{
+			"selector": "#__next",
+			"name": "Next.js",
+			"icon": "⚛️",
+			"category": "JavaScript Frameworks",
+			"website": "https://nextjs.org"
+		},
+		{
+			"selector": "#__nuxt",
+			"name": "Nuxt.js",
+			"icon": "💚",
+			"category": "JavaScript Frameworks",
+			"website": "https://nuxt.com"
+		},
+		{
+			"selector": "#___gatsby",
+			"name": "Gatsby",
+			"icon": "💜",
+			"category": "Static Site Generators",
+			"website": "https://gatsbyjs.com"
+		},
+		{
+			"selector": "[data-reactroot]",
+			"name": "React",
+			"icon": "⚛️",
+			"category": "JavaScript Frameworks",
+			"website": "https://react.dev"
+		},
+		{
+			"selector": "[ng-version]",
+			"name": "Angular",
+			"icon": "🅰️",
+			"category": "JavaScript Frameworks",
+			"website": "https://angular.io"
+		},
+		{
+			"selector": "[data-server-rendered='true']",
+			"name": "Vue.js SSR",
+			"icon": "💚",
+			"category": "JavaScript Frameworks",
+			"website": "https://vuejs.org"
+		},
+		{
+			"selector": "[data-v-]",
+			"attribute": true,
+			"name": "Vue.js",
+			"icon": "💚",
+			"category": "JavaScript Frameworks",
+			"website": "https://vuejs.org"
+		},
+		{
+			"selector": ".v-application",
+			"name": "Vuetify",
+			"icon": "🎨",
+			"category": "UI Frameworks",
+			"website": "https://vuetifyjs.com"
+		},
+		{
+			"selector": ".ant-layout",
+			"name": "Ant Design",
+			"icon": "🎨",
+			"category": "UI Frameworks",
+			"website": "https://ant.design"
+		},
+		{
+			"selector": ".el-container",
+			"name": "Element UI",
+			"icon": "🎨",
+			"category": "UI Frameworks",
+			"website": "https://element-plus.org"
+		},
+		{
+			"selector": "link[href*='fonts.googleapis.com']",
+			"name": "Google Fonts",
+			"icon": "🔤",
+			"category": "Font Scripts",
+			"website": "https://fonts.google.com"
+		},
+		{
+			"selector": "link[href*='use.typekit.net']",
+			"name": "Adobe Fonts",
+			"icon": "🔤",
+			"category": "Font Scripts",
+			"website": "https://fonts.adobe.com"
+		},
+		{
+			"selector": "link[rel='alternate'][type='application/rss+xml']",
+			"name": "RSS",
+			"icon": "📰",
+			"category": "Miscellaneous",
+			"website": "https://www.rssboard.org/rss-specification"
+		},
+		{
+			"selector": "meta[property^='og:']",
+			"name": "Open Graph",
+			"icon": "🔗",
+			"category": "Miscellaneous",
+			"website": "https://ogp.me"
+		},
+		{
+			"selector": "link[href*='fonts.bunny.net']",
+			"name": "Bunny Fonts",
+			"icon": "🐰",
+			"category": "Font Scripts",
+			"website": "https://fonts.bunny.net"
+		},
+		{
+			"selector": "link[href*='fontawesome'], link[href*='font-awesome']",
+			"name": "Font Awesome",
+			"icon": "flag",
+			"category": "Font Scripts",
+			"website": "https://fontawesome.com"
+		},
+		{
+			"selector": "script[src*='twemoji']",
+			"name": "Twitter Emoji (Twemoji)",
+			"icon": "�",
+			"category": "Font Scripts",
+			"website": "https://github.com/twitter/twemoji"
+		},
+		{
+			"selector": "script[class*='yoast-schema-graph']",
+			"name": "Yoast SEO",
+			"icon": "🚦",
+			"category": "SEO",
+			"website": "https://yoast.com/wordpress/plugins/seo/"
+		},
+		{
+			"selector": "meta[property='article:publisher'][content*='yoast']",
+			"name": "Yoast SEO",
+			"icon": "🚦",
+			"category": "SEO",
+			"website": "https://yoast.com/wordpress/plugins/seo/"
+		},
+		{
+			"selector": "script[src*='jquery-migrate']",
+			"name": "jQuery Migrate",
+			"icon": "📦",
+			"category": "JavaScript Libraries",
+			"website": "https://github.com/jquery/jquery-migrate"
+		},
+		{
+			"selector": "[data-slot]",
+			"name": "shadcn/ui",
+			"icon": "🎨",
+			"category": "UI Frameworks",
+			"website": "https://ui.shadcn.com"
+		},
+		{
+			"selector": "svg.lucide",
+			"name": "Lucide",
+			"icon": "✏️",
+			"category": "Font Scripts",
+			"website": "https://lucide.dev"
+		},
+		{
+			"selector": "[fetchpriority]",
+			"name": "Priority Hints",
+			"icon": "⚡",
+			"category": "Performance",
+			"website": "https://web.dev/priority-hints/"
+		},
+		{
+			"selector": "[q\\:container]",
+			"name": "Qwik",
+			"icon": "⚡",
+			"category": "JavaScript Frameworks",
+			"website": "https://qwik.builder.io"
+		},
+		{
+			"selector": "meta[name='generator'][content*='Astro']",
+			"name": "Astro",
+			"icon": "🚀",
+			"category": "Web Frameworks",
+			"website": "https://astro.build",
+			"versionAttribute": "content"
+		},
+		{
+			"selector": "#app[data-page]",
+			"name": "Inertia.js",
+			"icon": "🔗",
+			"category": "JavaScript Frameworks",
+			"website": "https://inertiajs.com"
+		},
+		{
+			"selector": "[wire\\:id]",
+			"name": "Laravel Livewire",
+			"icon": "j",
+			"category": "JavaScript Frameworks",
+			"website": "https://laravel-livewire.com"
+		},
+		{
+			"selector": "[hx-get],[hx-post],[hx-trigger]",
+			"name": "htmx",
+			"icon": "mj",
+			"category": "JavaScript Libraries",
+			"website": "https://htmx.org"
+		},
+		{
+			"selector": "script[src*='lit-html'],script[src*='lit-element']",
+			"name": "Lit",
+			"icon": "🔥",
+			"category": "JavaScript Libraries",
+			"website": "https://lit.dev"
+		},
+		{
+			"selector": "meta[name='generator'][content*='WooCommerce']",
+			"name": "WooCommerce",
+			"icon": "🛒",
+			"category": "E-Commerce",
+			"website": "https://woocommerce.com"
+		}
+	],
+	"css": [
+		{
+			"pattern": "tailwind",
+			"type": "class_prefix",
+			"prefixes": ["tw-", "md:", "lg:", "xl:", "2xl:", "sm:"],
+			"name": "Tailwind CSS",
+			"icon": "🎨",
+			"category": "CSS Frameworks",
+			"website": "https://tailwindcss.com"
+		},
+		{
+			"pattern": "bootstrap",
+			"type": "class_prefix",
+			"prefixes": [
+				"col-md-",
+				"col-lg-",
+				"col-sm-",
+				"btn-primary",
+				"container-fluid"
+			],
+			"name": "Bootstrap",
+			"icon": "🎨",
+			"category": "CSS Frameworks",
+			"website": "https://getbootstrap.com"
+		},
+		{
+			"pattern": "chakra",
+			"type": "class_prefix",
+			"prefixes": ["chakra-", "css-"],
+			"name": "Chakra UI",
+			"icon": "🎨",
+			"category": "UI Frameworks",
+			"website": "https://chakra-ui.com"
+		},
+		{
+			"pattern": "mui",
+			"type": "class_prefix",
+			"prefixes": ["MuiBox-", "MuiButton-", "Mui"],
+			"name": "Material UI",
+			"icon": "🎨",
+			"category": "UI Frameworks",
+			"website": "https://mui.com"
+		},
+		{
+			"pattern": "bulma",
+			"type": "class_prefix",
+			"prefixes": ["is-primary", "hero-body", "column is-"],
+			"name": "Bulma",
+			"icon": "🎨",
+			"category": "CSS Frameworks",
+			"website": "https://bulma.io"
+		},
+		{
+			"pattern": "foundation",
+			"type": "class_prefix",
+			"prefixes": ["small-12", "medium-", "columns"],
+			"name": "Foundation",
+			"icon": "🎨",
+			"category": "CSS Frameworks",
+			"website": "https://get.foundation"
+		},
+		{
+			"pattern": "angular-material",
+			"type": "class_prefix",
+			"prefixes": ["mat-"],
+			"name": "Angular Material",
+			"icon": "🎨",
+			"category": "UI Frameworks",
+			"website": "https://material.angular.io"
+		}
+	],
+	"cookies": [
+		{
+			"pattern": "__cf_bm",
+			"name": "Cloudflare",
+			"icon": "🌐",
+			"category": "CDN"
+		},
+		{
+			"pattern": "__cfduid",
+			"name": "Cloudflare",
+			"icon": "🌐",
+			"category": "CDN"
+		},
+		{
+			"pattern": "cf_clearance",
+			"name": "Cloudflare",
+			"icon": "🌐",
+			"category": "CDN"
+		},
+		{
+			"pattern": "AWSALB",
+			"name": "AWS (ALB)",
+			"icon": "☁️",
+			"category": "PaaS"
+		},
+		{
+			"pattern": "_ga",
+			"name": "Google Analytics",
+			"icon": "📊",
+			"category": "Analytics"
+		},
+		{
+			"pattern": "hubspotutk",
+			"name": "HubSpot",
+			"icon": "📣",
+			"category": "Marketing"
+		},
+		{
+			"pattern": "crisp-client",
+			"name": "Crisp Live Chat",
+			"icon": "💬",
+			"category": "Live Chat"
+		},
+		{
+			"pattern": "_hjSessionUser",
+			"name": "Hotjar",
+			"icon": "📊",
+			"category": "Analytics"
+		},
+		{
+			"pattern": "_fbp",
+			"name": "Facebook Pixel",
+			"icon": "📣",
+			"category": "Marketing"
+		},
+		{
+			"pattern": "intercom-session",
+			"name": "Intercom",
+			"icon": "💬",
+			"category": "Live Chat"
+		},
+		{
+			"pattern": "__stripe_mid",
+			"name": "Stripe",
+			"icon": "💳",
+			"category": "Payments"
+		}
+	],
+	"resources": [
+		{
+			"pattern": "cloudfront.net",
+			"name": "Amazon CloudFront",
+			"icon": "🌐",
+			"category": "CDN"
+		},
+		{
+			"pattern": "akamaized.net",
+			"name": "Akamai",
+			"icon": "🌐",
+			"category": "CDN"
+		},
+		{
+			"pattern": "fastly.net",
+			"name": "Fastly",
+			"icon": "🌐",
+			"category": "CDN"
+		},
+		{
+			"pattern": "amazonaws.com",
+			"name": "Amazon Web Services",
+			"icon": "☁️",
+			"category": "PaaS"
+		},
+		{
+			"pattern": "vercel.app",
+			"name": "Vercel",
+			"icon": "▲",
+			"category": "PaaS"
+		},
+		{
+			"pattern": "netlify.app",
+			"name": "Netlify",
+			"icon": "🌐",
+			"category": "PaaS"
+		},
+		{
+			"pattern": "herokuapp.com",
+			"name": "Heroku",
+			"icon": "🟣",
+			"category": "PaaS"
+		},
+		{
+			"pattern": "github.io",
+			"name": "GitHub Pages",
+			"icon": "🐙",
+			"category": "Hosting"
+		},
+		{
+			"pattern": "azurewebsites.net",
+			"name": "Microsoft Azure",
+			"icon": "☁️",
+			"category": "PaaS"
+		},
+		{
+			"pattern": "digitaloceanspaces.com",
+			"name": "DigitalOcean",
+			"icon": "☁️",
+			"category": "PaaS"
+		}
+	],
+	"iframes": [
+		{
+			"pattern": "player.vimeo.com",
+			"name": "Vimeo",
+			"icon": "▶️",
+			"category": "Video Players"
+		},
+		{
+			"pattern": "www.youtube.com/embed",
+			"name": "YouTube",
+			"icon": "▶️",
+			"category": "Video Players"
+		},
+		{
+			"pattern": "fast.wistia.net",
+			"name": "Wistia",
+			"icon": "▶️",
+			"category": "Video Players"
+		},
+		{
+			"pattern": "calendly.com",
+			"name": "Calendly",
+			"icon": "📅",
+			"category": "Scheduling"
+		},
+		{
+			"pattern": "typeform.com",
+			"name": "Typeform",
+			"icon": "📝",
+			"category": "Form Builders"
+		},
+		{
+			"pattern": "open.spotify.com/embed",
+			"name": "Spotify",
+			"icon": "🎵",
+			"category": "Media"
+		},
+		{
+			"pattern": "w.soundcloud.com",
+			"name": "SoundCloud",
+			"icon": "🎵",
+			"category": "Media"
+		},
+		{
+			"selector": "script[src*='cloudflareinsights.com']",
+			"name": "Cloudflare Browser Insights",
+			"icon": "🌐",
+			"category": "Analytics",
+			"website": "https://www.cloudflare.com/analytics/browser-insights/"
+		},
+		{
+			"selector": "script[src*='googletagmanager.com/gtag/js?id=G-']",
+			"name": "Google Analytics 4",
+			"icon": "📊",
+			"category": "Analytics",
+			"website": "https://marketingplatform.google.com/about/analytics/"
+		}
+	]
+}
