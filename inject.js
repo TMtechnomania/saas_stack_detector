@@ -30,54 +30,76 @@
 				name: "Next.js",
 				icon: "⚛️",
 				category: "JavaScript Frameworks",
+				website: "https://nextjs.org",
 			},
 			{
 				v: "__NUXT__",
 				name: "Nuxt.js",
 				icon: "💚",
 				category: "JavaScript Frameworks",
+				website: "https://nuxtjs.org",
 			},
 			{
 				v: "$nuxt",
 				name: "Nuxt.js",
 				icon: "💚",
 				category: "JavaScript Frameworks",
+				website: "https://nuxtjs.org",
 			},
 			{
 				v: "__GATSBY",
 				name: "Gatsby",
 				icon: "💜",
 				category: "Static Site Generators",
+				website: "https://www.gatsbyjs.com",
 			},
 			{
 				v: "__SVELTE",
 				name: "Svelte",
 				icon: "🧡",
 				category: "JavaScript Frameworks",
+				website: "https://svelte.dev",
 			},
 			{
 				v: "__remixContext",
 				name: "Remix",
 				icon: "💿",
 				category: "Web Frameworks",
+				website: "https://remix.run",
 			},
 			{
 				v: "__SAPPER__",
 				name: "Sapper",
 				icon: "🧡",
 				category: "Web Frameworks",
+				website: "https://sapper.svelte.dev",
 			},
 			{
 				v: "Turbo",
 				name: "Hotwire Turbo",
 				icon: "⚡",
 				category: "Web Frameworks",
+				website: "https://turbo.hotwired.dev",
 			},
 			{
 				v: "Stimulus",
 				name: "Hotwire Stimulus",
 				icon: "⚡",
 				category: "Web Frameworks",
+				website: "https://stimulus.hotwired.dev",
+			},
+			// Angular ecosystem
+			{
+				v: "Zone",
+				name: "Zone.js",
+				icon: "⚡",
+				category: "JavaScript Libraries",
+			},
+			{
+				v: "angular",
+				name: "AngularJS",
+				icon: "🅰️",
+				category: "JavaScript Frameworks",
 			},
 
 			// UI Frameworks
@@ -96,30 +118,77 @@
 
 			// Libraries
 			{
+				v: "d3",
+				name: "D3.js",
+				icon: "📊",
+				category: "JavaScript Graphics",
+			},
+			{
+				v: "lit",
+				name: "Lit",
+				icon: "🔥",
+				category: "JavaScript Libraries",
+				website: "https://lit.dev",
+			},
+			{
+				v: "LitElement",
+				name: "Lit",
+				icon: "🔥",
+				category: "JavaScript Libraries",
+				website: "https://lit.dev",
+			},
+			{
 				v: "__mobxGlobal",
 				name: "MobX",
 				icon: "📦",
 				category: "JavaScript Libraries",
+				website: "https://mobx.js.org",
 			},
 			{
 				v: "Motion",
 				name: "Framer Motion",
 				icon: "✨",
 				category: "JavaScript Libraries",
+				website: "https://www.framer.com/motion",
+			},
+
+			// React ecosystem helpers
+			{
+				v: "React",
+				name: "React",
+				icon: "⚛️",
+				category: "JavaScript Frameworks",
+				website: "https://reactjs.org",
+			},
+			{
+				v: "ReactDOM",
+				name: "React",
+				icon: "⚛️",
+				category: "JavaScript Frameworks",
+				website: "https://reactjs.org",
 			},
 
 			// Tools
+			{
+				v: "__TURBOPACK__",
+				name: "Turbopack",
+				icon: "⚡",
+				category: "Development",
+				website: "https://turbo.build",
+			},
 			{
 				v: "webpackJsonp",
 				name: "Webpack",
 				icon: "📦",
 				category: "Miscellaneous",
+				website: "https://webpack.js.org",
 			},
 			{
 				v: "__vite_is_modern_browser",
 				name: "Vite",
 				icon: "⚡",
 				category: "Miscellaneous",
+				website: "https://vitejs.dev",
 			},
 
 			// Platforms
@@ -128,14 +197,22 @@
 				name: "Shopify",
 				icon: "🛒",
 				category: "E-Commerce",
+				website: "https://www.shopify.com",
 			},
 			{
 				v: "Webflow",
 				name: "Webflow",
 				icon: "🎨",
 				category: "Website Builder",
+				website: "https://webflow.com",
 			},
-			{ v: "Wix", name: "Wix", icon: "🎨", category: "Website Builder" },
+			{
+				v: "Wix",
+				name: "Wix",
+				icon: "🎨",
+				category: "Website Builder",
+				website: "https://www.wix.com",
+			},
 
 			// Security
 			{
@@ -143,12 +220,14 @@
 				name: "reCAPTCHA",
 				icon: "🛡️",
 				category: "Security",
+				website: "https://www.google.com/recaptcha",
 			},
 			{
 				v: "hcaptcha",
 				name: "hCaptcha",
 				icon: "🛡️",
 				category: "Security",
+				website: "https://www.hcaptcha.com",
 			},
 
 			// Analytics / Feature Management
@@ -400,6 +479,7 @@
 					category: "JavaScript Libraries",
 					version: ver,
 					method: "Global",
+					website: "https://GitHub.com/zloirock/core-js",
 				});
 			}
 		} catch (e) {}
@@ -418,6 +498,7 @@
 						category: "JavaScript Libraries",
 						version: ver,
 						method: "Global",
+						website: "https://jquery.com",
 					});
 			}
 		} catch (e) {}
@@ -431,6 +512,7 @@
 					category: "JavaScript Frameworks",
 					version: win.Vue.version,
 					method: "Global",
+					website: "https://vuejs.org",
 				});
 			}
 		} catch (e) {}
@@ -438,7 +520,35 @@
 		return results;
 	}
 
-	// Run scanner and post message
-	const results = globalScanner();
-	window.postMessage({ type: "STACK_DETECTOR_GLOBALS", data: results }, "*");
+	// ────────────────────────────────────────────────────────
+	// 3️⃣ Polling Mechanism
+	// ────────────────────────────────────────────────────────
+
+	let previousResultsJSON = "";
+
+	function runAndNotify() {
+		const results = globalScanner();
+		const currentJSON = JSON.stringify(results);
+
+		if (currentJSON !== previousResultsJSON) {
+			previousResultsJSON = currentJSON;
+			window.postMessage(
+				{ type: "STACK_DETECTOR_GLOBALS", data: results },
+				"*",
+			);
+		}
+	}
+
+	// Initial scan
+	runAndNotify();
+
+	// Poll every 2 seconds for 10 seconds (total 5 scans)
+	let attempts = 0;
+	const interval = setInterval(() => {
+		attempts++;
+		runAndNotify();
+		if (attempts >= 5) {
+			clearInterval(interval);
+		}
+	}, 2000);
 })();

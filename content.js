@@ -102,11 +102,24 @@ async function domScanner() {
 		try {
 			const el = document.querySelector(sig.selector);
 			if (el) {
+				let version = null;
+				if (sig.versionAttribute) {
+					const attrVal = el.getAttribute(sig.versionAttribute);
+					if (attrVal) {
+						// Try to extract version number (e.g. "WordPress 6.9.1")
+						const match = attrVal.match(
+							/([0-9]+\.[0-9]+(\.[0-9]+)?)/,
+						);
+						if (match) version = match[1];
+					}
+				}
+
 				if (sig.attribute) {
-					// Check for attribute presence
-					add({ ...sig, method: "DOM" });
+					// Check for attribute presence (boolean check)
+					// If strict check needed, we could add logic here
+					add({ ...sig, method: "DOM", version });
 				} else {
-					add({ ...sig, method: "DOM" });
+					add({ ...sig, method: "DOM", version });
 				}
 			}
 		} catch (e) {}
@@ -279,7 +292,7 @@ async function domScanner() {
 			sig.prefixes.forEach((pre) => {
 				if (classList.some((c) => c.startsWith(pre))) hits++;
 			});
-			if (hits >= 2) {
+			if (hits >= 1) {
 				add({ ...sig, method: "CSS" });
 			}
 		}
@@ -306,6 +319,8 @@ async function runScan() {
 }
 
 // Listen for Main World results
+// Listen for Main World results
+let lastBadgeCount = 0;
 window.addEventListener("message", async (event) => {
 	// Only accept messages from same frame
 	if (event.source !== window) return;
@@ -324,7 +339,7 @@ window.addEventListener("message", async (event) => {
 				headerResults = response.detections;
 			}
 		} catch (e) {
-			console.warn("[StackDetector] Failed to get header detections:", e);
+			// console.warn("[StackDetector] Failed to get header detections:", e);
 		}
 
 		// Merge all 3 sources: DOM + Globals + Headers
@@ -343,11 +358,14 @@ window.addEventListener("message", async (event) => {
 
 		detectedTech = Array.from(map.values());
 
-		// Send to background for badge
-		chrome.runtime.sendMessage({
-			type: "updateBadge",
-			count: detectedTech.length,
-		});
+		// Send to background for badge only if count changed
+		if (detectedTech.length !== lastBadgeCount) {
+			lastBadgeCount = detectedTech.length;
+			chrome.runtime.sendMessage({
+				type: "updateBadge",
+				count: lastBadgeCount,
+			});
+		}
 	}
 });
 

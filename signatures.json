@@ -467,6 +467,36 @@
 			"icon": "🌐",
 			"category": "Analytics",
 			"website": "https://cloudflare.com"
+		},
+		"analytics.tiktok.com": {
+			"name": "TikTok Pixel",
+			"icon": "🎵",
+			"category": "Marketing",
+			"website": "https://ads.tiktok.com"
+		},
+		"code.tidio.co": {
+			"name": "Tidio",
+			"icon": "💬",
+			"category": "Live Chat",
+			"website": "https://tidio.com"
+		},
+		"www.googletagservices.com": {
+			"name": "Google Ads",
+			"icon": "📣",
+			"category": "Advertising",
+			"website": "https://ads.google.com"
+		},
+		"script.crazyegg.com": {
+			"name": "Crazy Egg",
+			"icon": "🥚",
+			"category": "Analytics",
+			"website": "https://crazyegg.com"
+		},
+		"pi.pardot.com": {
+			"name": "Pardot",
+			"icon": "📈",
+			"category": "Marketing Automation",
+			"website": "https://pardot.com"
 		}
 	},
 	"globals": [
@@ -476,6 +506,20 @@
 			"icon": "⚛️",
 			"category": "JavaScript Frameworks",
 			"website": "https://nextjs.org"
+		},
+		{
+			"variable": "Zone",
+			"name": "Zone.js",
+			"icon": "⚡",
+			"category": "JavaScript Libraries",
+			"website": "https://github.com/angular/zone.js"
+		},
+		{
+			"variable": "angular",
+			"name": "AngularJS",
+			"icon": "🅰️",
+			"category": "JavaScript Frameworks",
+			"website": "https://angularjs.org"
 		},
 		{
 			"variable": "__NUXT__",
@@ -763,6 +807,139 @@
 			"icon": "🗺️",
 			"category": "Maps",
 			"website": "https://mapbox.com"
+		},
+		{
+			"variable": "Alpine",
+			"name": "Alpine.js",
+			"icon": "🏔️",
+			"category": "JavaScript Frameworks",
+			"website": "https://alpinejs.dev"
+		},
+		{
+			"variable": "htmx",
+			"name": "htmx",
+			"icon": "mj",
+			"category": "JavaScript Libraries",
+			"website": "https://htmx.org"
+		},
+		{
+			"variable": "Livewire",
+			"name": "Laravel Livewire",
+			"icon": "j",
+			"category": "JavaScript Frameworks",
+			"website": "https://laravel-livewire.com"
+		},
+		{
+			"variable": "preact",
+			"name": "Preact",
+			"icon": "⚛️",
+			"category": "JavaScript Frameworks",
+			"website": "https://preactjs.com"
+		},
+		{
+			"variable": "posthog",
+			"name": "PostHog",
+			"icon": "dg",
+			"category": "Analytics",
+			"website": "https://posthog.com"
+		},
+		{
+			"variable": "FS",
+			"name": "FullStory",
+			"icon": "🎥",
+			"category": "Analytics",
+			"website": "https://fullstory.com"
+		},
+		{
+			"variable": "clarity",
+			"name": "Microsoft Clarity",
+			"icon": "🔍",
+			"category": "Analytics",
+			"website": "https://clarity.microsoft.com"
+		},
+		{
+			"variable": "NREUM",
+			"name": "New Relic",
+			"icon": "📉",
+			"category": "Performance",
+			"website": "https://newrelic.com"
+		},
+		{
+			"variable": "DD_RUM",
+			"name": "Datadog",
+			"icon": "🐶",
+			"category": "Performance",
+			"website": "https://datadoghq.com"
+		},
+		{
+			"variable": "algoliasearch",
+			"name": "Algolia",
+			"icon": "🔍",
+			"category": "Search",
+			"website": "https://algolia.com"
+		},
+		{
+			"variable": "HScout",
+			"name": "Help Scout",
+			"icon": "📫",
+			"category": "Customer Support",
+			"website": "https://helpscout.com"
+		},
+		{
+			"variable": "LiveChatWidget",
+			"name": "LiveChat",
+			"icon": "💬",
+			"category": "Live Chat",
+			"website": "https://livechat.com"
+		},
+		{
+			"variable": "olark",
+			"name": "Olark",
+			"icon": "💬",
+			"category": "Live Chat",
+			"website": "https://olark.com"
+		},
+		{
+			"variable": "ttq",
+			"name": "TikTok Pixel",
+			"icon": "🎵",
+			"category": "Marketing",
+			"website": "https://ads.tiktok.com"
+		},
+		{
+			"variable": "pintrk",
+			"name": "Pinterest Tag",
+			"icon": "📌",
+			"category": "Marketing",
+			"website": "https://ads.pinterest.com"
+		},
+		{
+			"variable": "Munchkin",
+			"name": "Marketo",
+			"icon": "📊",
+			"category": "Marketing Automation",
+			"website": "https://marketo.com"
+		},
+		{
+			"variable": "DISQUS",
+			"name": "Disqus",
+			"icon": "💬",
+			"category": "Comments",
+			"website": "https://disqus.com"
+		},
+		{
+			"variable": "Yotpo",
+			"name": "Yotpo",
+			"icon": "⭐",
+			"category": "Reviews",
+			"website": "https://yotpo.com"
+		},
+		{
+			"variable": "Recharge",
+			"name": "Recharge",
+			"icon": "🔄",
+			"category": "Payments",
+			"website": "https://rechargepayments.com"
 		}
 	],
 	"dom": [
@@ -771,70 +948,80 @@
 			"name": "WordPress",
 			"icon": "📝",
 			"category": "CMS",
-			"website": "https://wordpress.org"
+			"website": "https://wordpress.org",
+			"versionAttribute": "content"
 		},
 		{
 			"selector": "meta[name='generator'][content*='Webflow']",
 			"name": "Webflow",
 			"icon": "🎨",
 			"category": "Website Builder",
-			"website": "https://webflow.com"
+			"website": "https://webflow.com",
+			"versionAttribute": "content"
 		},
 		{
 			"selector": "meta[name='generator'][content*='Wix']",
 			"name": "Wix",
 			"icon": "🎨",
 			"category": "Website Builder",
-			"website": "https://wix.com"
+			"website": "https://wix.com",
+			"versionAttribute": "content"
 		},
 		{
 			"selector": "meta[name='generator'][content*='Squarespace']",
 			"name": "Squarespace",
 			"icon": "🎨",
 			"category": "Website Builder",
-			"website": "https://squarespace.com"
+			"website": "https://squarespace.com",
+			"versionAttribute": "content"
 		},
 		{
 			"selector": "meta[name='generator'][content*='Ghost']",
 			"name": "Ghost",
 			"icon": "📝",
 			"category": "CMS",
-			"website": "https://ghost.org"
+			"website": "https://ghost.org",
+			"versionAttribute": "content"
 		},
 		{
 			"selector": "meta[name='generator'][content*='Hugo']",
 			"name": "Hugo",
 			"icon": "📝",
 			"category": "Static Site Generators",
-			"website": "https://gohugo.io"
+			"website": "https://gohugo.io",
+			"versionAttribute": "content"
 		},
 		{
 			"selector": "meta[name='generator'][content*='Jekyll']",
 			"name": "Jekyll",
 			"icon": "📝",
 			"category": "Static Site Generators",
-			"website": "https://jekyllrb.com"
+			"website": "https://jekyllrb.com",
+			"versionAttribute": "content"
 		},
 		{
 			"selector": "meta[name='generator'][content*='Gatsby']",
 			"name": "Gatsby",
 			"icon": "💜",
 			"category": "Static Site Generators",
-			"website": "https://gatsbyjs.com"
+			"website": "https://gatsbyjs.com",
+			"versionAttribute": "content"
 		},
 		{
 			"selector": "meta[name='generator'][content*='Drupal']",
 			"name": "Drupal",
 			"icon": "📝",
 			"category": "CMS",
-			"website": "https://drupal.org"
+			"website": "https://drupal.org",
+			"versionAttribute": "content"
 		},
 		{
 			"selector": "meta[name='generator'][content*='Joomla']",
 			"name": "Joomla",
 			"icon": "📝",
 			"category": "CMS",
-			"website": "https://joomla.org"
+			"website": "https://joomla.org",
+			"versionAttribute": "content"
 		},
 		{
 			"selector": "#__next",
@@ -922,6 +1109,62 @@
 			"website": "https://fonts.adobe.com"
 		},
 		{
+			"selector": "link[rel='alternate'][type='application/rss+xml']",
+			"name": "RSS",
+			"icon": "📰",
+			"category": "Miscellaneous",
+			"website": "https://www.rssboard.org/rss-specification"
+		},
+		{
+			"selector": "meta[property^='og:']",
+			"name": "Open Graph",
+			"icon": "🔗",
+			"category": "Miscellaneous",
+			"website": "https://ogp.me"
+		},
+		{
+			"selector": "link[href*='fonts.bunny.net']",
+			"name": "Bunny Fonts",
+			"icon": "🐰",
+			"category": "Font Scripts",
+			"website": "https://fonts.bunny.net"
+		},
+		{
+			"selector": "link[href*='fontawesome'], link[href*='font-awesome']",
+			"name": "Font Awesome",
+			"icon": "flag",
+			"category": "Font Scripts",
+			"website": "https://fontawesome.com"
+		},
+		{
+			"selector": "script[src*='twemoji']",
+			"name": "Twitter Emoji (Twemoji)",
+			"icon": "�",
+			"category": "Font Scripts",
+			"website": "https://github.com/twitter/twemoji"
+		},
+		{
+			"selector": "script[class*='yoast-schema-graph']",
+			"name": "Yoast SEO",
+			"icon": "🚦",
+			"category": "SEO",
+			"website": "https://yoast.com/wordpress/plugins/seo/"
+		},
+		{
+			"selector": "meta[property='article:publisher'][content*='yoast']",
+			"name": "Yoast SEO",
+			"icon": "🚦",
+			"category": "SEO",
+			"website": "https://yoast.com/wordpress/plugins/seo/"
+		},
+		{
+			"selector": "script[src*='jquery-migrate']",
+			"name": "jQuery Migrate",
+			"icon": "📦",
+			"category": "JavaScript Libraries",
+			"website": "https://github.com/jquery/jquery-migrate"
+		},
+		{
 			"selector": "[data-slot]",
 			"name": "shadcn/ui",
 			"icon": "🎨",
@@ -941,6 +1184,56 @@
 			"icon": "⚡",
 			"category": "Performance",
 			"website": "https://web.dev/priority-hints/"
+		},
+		{
+			"selector": "[q\\:container]",
+			"name": "Qwik",
+			"icon": "⚡",
+			"category": "JavaScript Frameworks",
+			"website": "https://qwik.builder.io"
+		},
+		{
+			"selector": "meta[name='generator'][content*='Astro']",
+			"name": "Astro",
+			"icon": "🚀",
+			"category": "Web Frameworks",
+			"website": "https://astro.build",
+			"versionAttribute": "content"
+		},
+		{
+			"selector": "#app[data-page]",
+			"name": "Inertia.js",
+			"icon": "🔗",
+			"category": "JavaScript Frameworks",
+			"website": "https://inertiajs.com"
+		},
+		{
+			"selector": "[wire\\:id]",
+			"name": "Laravel Livewire",
+			"icon": "j",
+			"category": "JavaScript Frameworks",
+			"website": "https://laravel-livewire.com"
+		},
+		{
+			"selector": "[hx-get],[hx-post],[hx-trigger]",
+			"name": "htmx",
+			"icon": "mj",
+			"category": "JavaScript Libraries",
+			"website": "https://htmx.org"
+		},
+		{
+			"selector": "script[src*='lit-html'],script[src*='lit-element']",
+			"name": "Lit",
+			"icon": "🔥",
+			"category": "JavaScript Libraries",
+			"website": "https://lit.dev"
+		},
+		{
+			"selector": "meta[name='generator'][content*='WooCommerce']",
+			"name": "WooCommerce",
+			"icon": "🛒",
+			"category": "E-Commerce",
+			"website": "https://woocommerce.com"
 		}
 	],
 	"css": [
@@ -1003,6 +1296,15 @@
 			"icon": "🎨",
 			"category": "CSS Frameworks",
 			"website": "https://get.foundation"
+		},
+		{
+			"pattern": "angular-material",
+			"type": "class_prefix",
+			"prefixes": ["mat-"],
+			"name": "Angular Material",
+			"icon": "🎨",
+			"category": "UI Frameworks",
+			"website": "https://material.angular.io"
 		}
 	],
 	"cookies": [
@@ -1177,6 +1479,20 @@
 			"name": "SoundCloud",
 			"icon": "🎵",
 			"category": "Media"
+		},
+		{
+			"selector": "script[src*='cloudflareinsights.com']",
+			"name": "Cloudflare Browser Insights",
+			"icon": "🌐",
+			"category": "Analytics",
+			"website": "https://www.cloudflare.com/analytics/browser-insights/"
+		},
+		{
+			"selector": "script[src*='googletagmanager.com/gtag/js?id=G-']",
+			"name": "Google Analytics 4",
+			"icon": "📊",
+			"category": "Analytics",
+			"website": "https://marketingplatform.google.com/about/analytics/"
 		}
 	]
 }

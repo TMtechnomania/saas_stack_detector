@@ -34,6 +34,12 @@ const headerSignatures = {
 			icon: "🌐",
 			category: "CDN",
 		},
+		{
+			match: "bunny",
+			name: "Bunny CDN",
+			icon: "🐰",
+			category: "CDN",
+		},
 		{ match: "nginx", name: "Nginx", icon: "🖥️", category: "Web Servers" },
 		{
 			match: "apache",

@@ -183,8 +183,25 @@
 					tech.version ?
 						`<span class="tech-version">${tech.version}</span>`
 					:	"";
+
+				let iconHtml = `<span class="tech-icon-text">${tech.icon}</span>`;
+				if (tech.website) {
+					try {
+						const domain = new URL(tech.website).hostname;
+						const iconUrl = `https://www.google.com/s2/favicons?domain=${domain}&sz=64`;
+						// We use onerror to fallback to the emoji if the image fails or is transparent
+						// (though google usually returns a default globe)
+						// Actually simpler to just put img and if it fails hide it?
+						// Google API practically always returns distinct image or generic globe.
+						iconHtml = `<img src="${iconUrl}" alt="${tech.name}" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
+									<span class="tech-icon-text" style="display:none">${tech.icon}</span>`;
+					} catch (e) {
+						// Invalid URL, keep emoji
+					}
+				}
+
 				card.innerHTML = `
-					<span class="tech-icon">${tech.icon}</span>
+					<div class="tech-icon">${iconHtml}</div>
 					<div class="tech-info">
 						<div class="tech-name">${tech.name} ${versionHtml}</div>
 						<div class="tech-method">via ${tech.method || "detection"}</div>
