@@ -10,6 +10,23 @@
 let detectedTech = [];
 let signatures = null;
 
+function toSignatureEntries(signatureSet) {
+	if (!signatureSet) return [];
+
+	if (Array.isArray(signatureSet)) {
+		return signatureSet
+			.filter((item) => item && item.pattern)
+			.map((item) => ({ pattern: item.pattern.toLowerCase(), info: item }));
+	}
+
+	return Object.entries(signatureSet)
+		.filter(([, info]) => info)
+		.map(([pattern, info]) => ({
+			pattern: pattern.toLowerCase(),
+			info,
+		}));
+}
+
 // ────────────────────────────────────────────────────────
 // 1️⃣ DOM Scanner (ISOLATED World)
 // ────────────────────────────────────────────────────────
@@ -37,8 +54,8 @@ async function domScanner() {
 	const scripts = document.querySelectorAll("script[src]");
 	const scriptSrcs = Array.from(scripts).map((s) => s.src.toLowerCase());
 
-	for (const [domain, info] of Object.entries(signatures.scripts || {})) {
-		if (scriptSrcs.some((src) => src.includes(domain.toLowerCase()))) {
+	for (const { pattern, info } of toSignatureEntries(signatures.scripts)) {
+		if (scriptSrcs.some((src) => src.includes(pattern))) {
 			add({ ...info, method: "Script" });
 		}
 	}
@@ -47,8 +64,8 @@ async function domScanner() {
 	const iframes = document.querySelectorAll("iframe[src]");
 	const iframeSrcs = Array.from(iframes).map((i) => i.src.toLowerCase());
 
-	for (const [domain, info] of Object.entries(signatures.iframes || {})) {
-		if (iframeSrcs.some((src) => src.includes(domain.toLowerCase()))) {
+	for (const { pattern, info } of toSignatureEntries(signatures.iframes)) {
+		if (iframeSrcs.some((src) => src.includes(pattern))) {
 			add({ ...info, method: "iFrame" });
 		}
 	}
@@ -63,8 +80,8 @@ async function domScanner() {
 	// Scan script srcs as resources too (for CDN detection)
 	const allUrls = [...resourceUrls, ...scriptSrcs];
 
-	for (const [domain, info] of Object.entries(signatures.resources || {})) {
-		if (allUrls.some((url) => url.includes(domain.toLowerCase()))) {
+	for (const { pattern, info } of toSignatureEntries(signatures.resources)) {
+		if (allUrls.some((url) => url.includes(pattern))) {
 			add({ ...info, method: "Resource" });
 		}
 	}
