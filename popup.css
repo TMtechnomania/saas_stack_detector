@@ -160,13 +160,9 @@ body {
 .logo-icon {
   width: 32px;
   height: 32px;
-  background: var(--primary);
-  border-radius: var(--radius-sm);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
-  box-shadow: 0 0 15px var(--primary-glow);
 }
 
 .title {
