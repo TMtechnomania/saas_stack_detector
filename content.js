@@ -16,7 +16,10 @@ function toSignatureEntries(signatureSet) {
 	if (Array.isArray(signatureSet)) {
 		return signatureSet
 			.filter((item) => item && item.pattern)
-			.map((item) => ({ pattern: item.pattern.toLowerCase(), info: item }));
+			.map((item) => ({
+				pattern: item.pattern.toLowerCase(),
+				info: item,
+			}));
 	}
 
 	return Object.entries(signatureSet)
@@ -147,6 +150,71 @@ async function domScanner() {
 		});
 	}
 
+	// Lucide icons (broader: lucide- class prefix on SVGs)
+	if (
+		document.querySelector("svg.lucide") ||
+		document.querySelector("[class*='lucide-']")
+	) {
+		add({
+			name: "Lucide",
+			icon: "✏️",
+			category: "Font Scripts",
+			method: "DOM",
+		});
+	}
+
+	// shadcn/ui (data-slot is the v2 pattern; also check for common shadcn class combos)
+	if (document.querySelector("[data-slot]")) {
+		add({
+			name: "shadcn/ui",
+			icon: "🎨",
+			category: "UI Frameworks",
+			method: "DOM",
+		});
+	}
+
+	// HSTS (inferred from CSP meta)
+	if (window.location.protocol === "https:") {
+		const cspMeta = document.querySelector(
+			"meta[http-equiv='Content-Security-Policy']",
+		);
+		if (
+			cspMeta &&
+			cspMeta.content &&
+			cspMeta.content.includes("upgrade-insecure-requests")
+		) {
+			add({
+				name: "HSTS",
+				icon: "🛡️",
+				category: "Security",
+				method: "DOM",
+			});
+		}
+	}
+
+	// Cloudflare (meta detection — cf-* headers exposed as meta)
+	if (
+		document.querySelector("script[src*='cloudflareinsights']") ||
+		document.querySelector("script[data-cf-beacon]")
+	) {
+		add({
+			name: "Cloudflare",
+			icon: "🌐",
+			category: "CDN",
+			method: "Script",
+		});
+	}
+
+	// Priority Hints
+	if (document.querySelector("[fetchpriority]")) {
+		add({
+			name: "Priority Hints",
+			icon: "⚡",
+			category: "Performance",
+			method: "DOM",
+		});
+	}
+
 	// ─── CSS Frameworks ───
 	const classSet = new Set();
 	const clsEls = document.querySelectorAll("[class]");
@@ -246,8 +314,21 @@ window.addEventListener("message", async (event) => {
 		const globalResults = event.data.data;
 		const domResults = await domScanner(); // Run DOM scan now
 
-		// Merge
-		const all = [...domResults, ...globalResults];
+		// Fetch header detections from background
+		let headerResults = [];
+		try {
+			const response = await chrome.runtime.sendMessage({
+				type: "GET_HEADER_DETECTIONS",
+			});
+			if (response && response.detections) {
+				headerResults = response.detections;
+			}
+		} catch (e) {
+			console.warn("[StackDetector] Failed to get header detections:", e);
+		}
+
+		// Merge all 3 sources: DOM + Globals + Headers
+		const all = [...domResults, ...globalResults, ...headerResults];
 
 		// Deduplicate
 		const map = new Map();
@@ -275,7 +356,6 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 	if (request.type === "GET_DETECTIONS") {
 		// Respond immediately with cached results
 		sendResponse({ detections: detectedTech });
-		// Optionally trigger a re-scan? No, cache is fine.
 	}
 });
 

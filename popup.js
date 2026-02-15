@@ -18,9 +18,16 @@
 	const techCountEl = document.getElementById("tech-count");
 	const toastEl = document.getElementById("toast");
 	const btnRefresh = document.getElementById("btn-refresh");
+	const btnTheme = document.getElementById("btn-theme");
 	const btnExport = document.getElementById("btn-export");
 	const btnCopy = document.getElementById("btn-copy");
 	const btnMissing = document.getElementById("btn-missing");
+
+	// ─── Theme Init ───
+	const savedTheme = localStorage.getItem("theme") || "dark";
+	if (savedTheme === "light") {
+		document.documentElement.setAttribute("data-theme", "light");
+	}
 
 	// ─── Init ───
 	document.addEventListener("DOMContentLoaded", init);
@@ -53,29 +60,53 @@
 			// Request results from content script
 			showScanning();
 
-			// Add a small delay/retry to allow content script to load if just opened
-			chrome.tabs.sendMessage(
-				tab.id,
-				{ type: "GET_DETECTIONS" },
-				(response) => {
-					if (chrome.runtime.lastError) {
-						// Content script not ready or not injected
-						console.warn(
-							"Content script error:",
-							chrome.runtime.lastError,
-						);
+			// Fetch detections from content script + header detections from background
+			const tabId = tab.id;
 
-						// If we can't communicate, maybe try injecting or just show error
-						// For now, let's just show an error message asking to reload
-						showError("Please reload the page to scan");
-						return;
+			// Get content script detections
+			chrome.tabs.sendMessage(
+				tabId,
+				{ type: "GET_DETECTIONS" },
+				async (contentResponse) => {
+					let contentDetections = [];
+					if (
+						!chrome.runtime.lastError &&
+						contentResponse &&
+						contentResponse.detections
+					) {
+						contentDetections = contentResponse.detections;
 					}
 
-					if (response && response.detections) {
-						currentResults = deduplicateResults(
-							response.detections,
+					// Also fetch header detections from background
+					let headerDetections = [];
+					try {
+						const headerResponse = await chrome.runtime.sendMessage(
+							{
+								type: "GET_HEADER_DETECTIONS",
+								tabId: tabId,
+							},
 						);
+						if (headerResponse && headerResponse.detections) {
+							headerDetections = headerResponse.detections;
+						}
+					} catch (e) {
+						console.warn("Header detection fetch failed:", e);
+					}
+
+					// Merge all
+					const allDetections = [
+						...contentDetections,
+						...headerDetections,
+					];
+
+					if (allDetections.length > 0) {
+						currentResults = deduplicateResults(allDetections);
 						renderResults(currentResults);
+					} else if (
+						contentDetections.length === 0 &&
+						chrome.runtime.lastError
+					) {
+						showError("Please reload the page to scan");
 					} else {
 						renderResults([]);
 					}
@@ -189,6 +220,18 @@
 	}
 
 	// ─── Event Listeners ───
+	btnTheme.addEventListener("click", () => {
+		const currentTheme = localStorage.getItem("theme") || "dark";
+		const newTheme = currentTheme === "dark" ? "light" : "dark";
+
+		if (newTheme === "light") {
+			document.documentElement.setAttribute("data-theme", "light");
+		} else {
+			document.documentElement.removeAttribute("data-theme");
+		}
+		localStorage.setItem("theme", newTheme);
+	});
+
 	btnRefresh.addEventListener("click", () => {
 		location.reload(); // Reload popup to re-init
 	});

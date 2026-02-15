@@ -3,7 +3,8 @@
 	"name": "SaaS Stack Detector",
 	"version": "1.0.0",
 	"description": "Instantly detect the SaaS tools, frameworks, and libraries any website uses. Fast, minimal, developer-focused.",
-	"permissions": ["activeTab", "scripting"],
+	"permissions": ["activeTab", "scripting", "webRequest", "webNavigation"],
+	"host_permissions": ["<all_urls>"],
 	"action": {
 		"default_popup": "popup.html",
 		"default_icon": {

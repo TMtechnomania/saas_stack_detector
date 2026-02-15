@@ -455,6 +455,18 @@
 			"icon": "📣",
 			"category": "Marketing",
 			"website": "https://forbusiness.snapchat.com"
+		},
+		"static.cloudflareinsights.com": {
+			"name": "Cloudflare Browser Insights",
+			"icon": "🌐",
+			"category": "Analytics",
+			"website": "https://cloudflare.com"
+		},
+		"cloudflareinsights.com/beacon": {
+			"name": "Cloudflare Browser Insights",
+			"icon": "🌐",
+			"category": "Analytics",
+			"website": "https://cloudflare.com"
 		}
 	},
 	"globals": [
@@ -908,6 +920,27 @@
 			"icon": "🔤",
 			"category": "Font Scripts",
 			"website": "https://fonts.adobe.com"
+		},
+		{
+			"selector": "[data-slot]",
+			"name": "shadcn/ui",
+			"icon": "🎨",
+			"category": "UI Frameworks",
+			"website": "https://ui.shadcn.com"
+		},
+		{
+			"selector": "svg.lucide",
+			"name": "Lucide",
+			"icon": "✏️",
+			"category": "Font Scripts",
+			"website": "https://lucide.dev"
+		},
+		{
+			"selector": "[fetchpriority]",
+			"name": "Priority Hints",
+			"icon": "⚡",
+			"category": "Performance",
+			"website": "https://web.dev/priority-hints/"
 		}
 	],
 	"css": [

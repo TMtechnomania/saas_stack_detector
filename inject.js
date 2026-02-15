@@ -329,15 +329,39 @@
 				});
 		} catch (e) {}
 
-		// React
+		// React (fixed: double underscore prefix)
 		try {
 			if (
-				win._REACT_DEVTOOLS_GLOBAL_HOOK__ ||
+				win.__REACT_DEVTOOLS_GLOBAL_HOOK__ ||
 				document.querySelector("[data-reactroot]")
 			) {
 				add({
 					name: "React",
 					icon: "⚛️",
+					category: "JavaScript Frameworks",
+					method: "Global",
+				});
+			}
+		} catch (e) {}
+
+		// Turbopack
+		try {
+			if (win.__TURBOPACK__ || win.__turbopack_require__) {
+				add({
+					name: "Turbopack",
+					icon: "📦",
+					category: "Development",
+					method: "Global",
+				});
+			}
+		} catch (e) {}
+
+		// Angular
+		try {
+			if (win.ng || document.querySelector("[ng-version]")) {
+				add({
+					name: "Angular",
+					icon: "🅰️",
 					category: "JavaScript Frameworks",
 					method: "Global",
 				});
